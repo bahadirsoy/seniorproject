@@ -4,7 +4,10 @@ import './App.css';
 
 //import custompages
 import Header from './components/header/header.component';
-import HomePage from './pages/homepage/homepage.';
+import HomePage from './pages/homepage/homepage';
+import SignInPage from './pages/signinpage/signinpage';
+import SignUpPage from './pages/signuppage/signuppage';
+import ProfilePage from './pages/profilepage/profilepage';
 
 //import react router components
 import {
@@ -21,6 +24,9 @@ function App() {
 
       <Routes>
         <Route path='/' element={<HomePage/>}/>
+        <Route path='/signin' element={<SignInPage/>}/>
+        <Route path='/signup' element={<SignUpPage/>}/>
+        <Route path='/profile' element={<ProfilePage/>}/>
       </Routes>
     </div>
   );
