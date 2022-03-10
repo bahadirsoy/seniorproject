@@ -9,7 +9,7 @@ import './homepage.styles.css'
 function HomePage(){
     return(
         <div>
-            HomePage
+            Homepage
         </div>
     )
 }
