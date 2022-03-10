@@ -25,6 +25,8 @@ function CustomInput(props){
                 </InputGroup.Text>
 
                 <FormControl 
+                    type = {props.type}
+                    name = {props.name}
                     id={props.formId} 
                     aria-describedby={props.inputNameId}
                     placeholder={props.placeholder}

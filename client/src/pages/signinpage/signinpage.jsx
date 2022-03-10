@@ -29,12 +29,22 @@ function SignInPage(){
                     <Col xs={10}>
                         <CustomInput
                             //labelName = "Username"
+                            name = "username"
                             inputName = "Username"
                             placeholder = "Enter username"
                             formId = "form-username"
                             inputNameId = "input-username"
                         />
                         
+                        <CustomInput
+                            type = "password"
+                            name = "password"
+                            //labelName = "Username"
+                            inputName = "Password"
+                            placeholder = "Enter password"
+                            formId = "form-username"
+                            inputNameId = "input-username"
+                        />
                     </Col>
 
                     <Col>
