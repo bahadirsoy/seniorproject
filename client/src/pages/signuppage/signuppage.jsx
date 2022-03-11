@@ -14,6 +14,8 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 //import axios
 import Axios from 'axios'
 
+//import navigate
+import { useNavigate } from 'react-router-dom';
 
 function SignUpPage(){
 
@@ -21,13 +23,16 @@ function SignUpPage(){
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
+    //navigate
+    const navigate = useNavigate()
+
     //insert user api request
     const insertUser = () => {
         Axios.post('http://localhost:3001/api/insertUser', {
             username: username, 
             password: password
         }).then((response) => { //feedback from api
-            
+            navigate('/')
         })
     }
 

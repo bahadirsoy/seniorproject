@@ -14,6 +14,9 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 //import axios
 import Axios from 'axios'
 
+//import navigate
+import { useNavigate } from 'react-router-dom';
+
 
 function SignInPage(){
 
@@ -22,7 +25,10 @@ function SignInPage(){
     const [password, setPassword] = useState('')
 
     //login status
-    const [loginStatus, setLoginStatus] = useState('')
+    const [loginStatus, setLoginStatus] = useState()
+
+    //navigate
+    const navigate = useNavigate()
 
     //insert user api request
     const login = () => {
@@ -30,10 +36,11 @@ function SignInPage(){
             username: username, 
             password: password
         }).then((response) => { //feedback from api
-            if(response.data.message){
-                setLoginStatus(response.data.message)
-            } else{
-                setLoginStatus(response.data[0].username)
+            //if succesful login
+            if(response.data.isLoginSuccessful){
+                setLoginStatus(1)
+            } else if(!response.data.isLoginSuccessful){ //if unsuccesful login
+                setLoginStatus(0)
             }
         })
     }
