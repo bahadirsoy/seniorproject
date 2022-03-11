@@ -66,7 +66,7 @@ function SignUpPage(){
                             onchange = {(e) => {setPassword(e.target.value)}}
                         />
 
-                        <button onClick={insertUser}>submit</button>
+                        <Button onClick={insertUser} variant="primary">Primary</Button>
                     </Col>
 
                     <Col>
