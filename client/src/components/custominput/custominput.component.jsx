@@ -30,6 +30,7 @@ function CustomInput(props){
                     id={props.formId} 
                     aria-describedby={props.inputNameId}
                     placeholder={props.placeholder}
+                    onChange = {props.onchange}
                 />
             </InputGroup>
         </div>
