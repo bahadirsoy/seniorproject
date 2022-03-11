@@ -9,7 +9,7 @@ import './signuppage.styles.css'
 import CustomInput from '../../components/custominput/custominput.component';
 
 //import react strap components
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, Alert } from 'react-bootstrap';
 
 //import axios
 import Axios from 'axios'
@@ -23,6 +23,9 @@ function SignUpPage(){
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
+    //signUp status
+    const [signUpStatus, setSignUpStatus] = useState('')
+
     //navigate
     const navigate = useNavigate()
 
@@ -32,7 +35,13 @@ function SignUpPage(){
             username: username, 
             password: password
         }).then((response) => { //feedback from api
-            navigate('/')
+            if(response.data.error){
+                if(response.data.error.sqlState == "23000"){ // if username is already taken
+                    setSignUpStatus(23000)
+                }
+            } else{
+                setSignUpStatus(1)
+            }
         })
     }
 
@@ -46,10 +55,24 @@ function SignUpPage(){
                     <h1 className='mb-5'>Sign Up Page</h1>
 
                     <Col>
-                        
+                    
                     </Col>
 
                     <Col xs={10}>
+
+                        {
+                            signUpStatus == 23000 ?
+
+                            <Alert variant="danger">
+                            <Alert.Heading>This username is already taken</Alert.Heading>
+                                <p>
+                                    Please sign up with another username
+                                </p>
+                            </Alert> :
+
+                            null
+                        }
+
                         <CustomInput
                             //labelName = "Username"
                             name = "username"

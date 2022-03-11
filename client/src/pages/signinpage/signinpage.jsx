@@ -17,6 +17,9 @@ import Axios from 'axios'
 //import navigate
 import { useNavigate } from 'react-router-dom';
 
+//import session
+import Session from 'react-session-api'
+
 
 function SignInPage(){
 
@@ -39,6 +42,11 @@ function SignInPage(){
             //if succesful login
             if(response.data.isLoginSuccessful){
                 setLoginStatus(1)
+
+                //set sessions
+                Session.set("username", "soyisi")
+
+                navigate("/")
             } else if(!response.data.isLoginSuccessful){ //if unsuccesful login
                 setLoginStatus(0)
             }
