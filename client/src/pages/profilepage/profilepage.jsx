@@ -42,7 +42,8 @@ function ProfilePage(props){
     //update name
     const updateName = () => {
         Axios.put("http://localhost:3001/api/updateName", {
-            name: name
+            name: name,
+            username: userInformations.username
         }).then((response) => {
             console.log(response)
         })
@@ -51,7 +52,8 @@ function ProfilePage(props){
     //update name
     const updateSurname = () => {
         Axios.put("http://localhost:3001/api/updateSurname", {
-            surname: surname
+            surname: surname,
+            username: userInformations.username
         }).then((response) => {
             console.log(response)
         })
@@ -60,7 +62,8 @@ function ProfilePage(props){
     //update name
     const updateEmail = () => {
         Axios.put("http://localhost:3001/api/updateEmail", {
-            email: email
+            email: email,
+            username: userInformations.username
         }).then((response) => {
             console.log(response)
         })
@@ -69,7 +72,8 @@ function ProfilePage(props){
     //update name
     const updatePhone = () => {
         Axios.put("http://localhost:3001/api/updatePhone", {
-            phone: phone
+            phone: phone,
+            username: userInformations.username
         }).then((response) => {
             console.log(response)
         })
