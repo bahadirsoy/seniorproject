@@ -9,7 +9,7 @@ import './signinpage.styles.css'
 import CustomInput from '../../components/custominput/custominput.component';
 
 //import react strap components
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, Alert } from 'react-bootstrap';
 
 //import axios
 import Axios from 'axios'
@@ -66,6 +66,20 @@ function SignInPage(props){
                     </Col>
 
                     <Col xs={10}>
+
+                        {
+                            loginStatus == 0 ?
+
+                            <Alert variant="danger">
+                            <Alert.Heading>Wrong username or password</Alert.Heading>
+                                <p>
+                                    Please try again
+                                </p>
+                            </Alert> :
+
+                            null
+                        }
+
                         <CustomInput
                             //labelName = "Username"
                             name = "username"
@@ -91,9 +105,7 @@ function SignInPage(props){
                     </Col>
 
                     <Col>
-                        {
-                            loginStatus
-                        }
+                        
                     </Col>
                 </Row>
             </Container>
