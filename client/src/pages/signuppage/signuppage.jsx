@@ -27,6 +27,9 @@ function SignUpPage(props){
     //user inputs
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [name, setName] = useState('')
+    const [surname, setSurname] = useState('')
+    const [email, setEmail] = useState('')
 
     //signUp status
     const [signUpStatus, setSignUpStatus] = useState('')
@@ -38,7 +41,10 @@ function SignUpPage(props){
     const insertUser = () => {
         Axios.post('http://localhost:3001/api/insertUser', {
             username: username, 
-            password: password
+            password: password,
+            name: name,
+            surname: surname,
+            email: email
         }).then((response) => { //feedback from api
             if(response.data.error){
                 if(response.data.error.sqlState == "23000"){ // if username is already taken
@@ -82,7 +88,7 @@ function SignUpPage(props){
 
                             null
                         }
-
+                    
                         <CustomInput
                             //labelName = "Username"
                             name = "username"
@@ -103,6 +109,40 @@ function SignUpPage(props){
                             inputNameId = "input-password"
                             onchange = {(e) => {setPassword(e.target.value)}}
                         />
+
+                        <CustomInput
+                            type = "text"
+                            name = "name"
+                            //labelName = "Username"
+                            inputName = "Name"
+                            placeholder = "Enter your name"
+                            formId = "form-name"
+                            inputNameId = "input-name"
+                            onchange = {(e) => {setName(e.target.value)}}
+                        />
+                        
+                        <CustomInput
+                            type = "text"
+                            name = "surname"
+                            //labelName = "Username"
+                            inputName = "Surname"
+                            placeholder = "Enter your surname"
+                            formId = "form-surname"
+                            inputNameId = "input-surname"
+                            onchange = {(e) => {setSurname(e.target.value)}}
+                        />
+
+                        <CustomInput
+                            type = "email"
+                            name = "email"
+                            //labelName = "Username"
+                            inputName = "E-mail"
+                            placeholder = "Enter your e-mail"
+                            formId = "form-email"
+                            inputNameId = "input-email"
+                            onchange = {(e) => {setEmail(e.target.value)}}
+                        />
+                        
 
                         <Button onClick={insertUser} variant="primary">Sign up</Button>
                     </Col>
