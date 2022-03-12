@@ -41,22 +41,38 @@ function ProfilePage(props){
 
     //update name
     const updateName = () => {
-
+        Axios.put("http://localhost:3001/api/updateName", {
+            name: name
+        }).then((response) => {
+            console.log(response)
+        })
     }
 
     //update name
     const updateSurname = () => {
-
+        Axios.put("http://localhost:3001/api/updateSurname", {
+            surname: surname
+        }).then((response) => {
+            console.log(response)
+        })
     }
 
     //update name
     const updateEmail = () => {
-
+        Axios.put("http://localhost:3001/api/updateEmail", {
+            email: email
+        }).then((response) => {
+            console.log(response)
+        })
     }
 
     //update name
     const updatePhone = () => {
-
+        Axios.put("http://localhost:3001/api/updatePhone", {
+            phone: phone
+        }).then((response) => {
+            console.log(response)
+        })
     }
 
     //get user informations
