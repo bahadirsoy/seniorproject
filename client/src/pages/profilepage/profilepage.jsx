@@ -9,7 +9,7 @@ import './profilepage.styles.css'
 import CustomInput from '../../components/custominput/custominput.component';
 
 //import react strap components
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, InputGroup, FormControl } from 'react-bootstrap';
 
 //import axios
 import Axios from 'axios'
@@ -65,7 +65,7 @@ function ProfilePage(props){
                     <h1 className='mb-5'>Profile Page</h1>
 
                     <Col>
-                        {console.log(1)}
+                        
                     </Col>
 
                     <Col xs={10}>
@@ -75,46 +75,49 @@ function ProfilePage(props){
                             readonly = {1}
                         />
 
-                        
-                        <CustomInput
-                            name = "name"
-                            inputName = "Name: "
-                            placeholder = {userInformations ? userInformations.name : null}
-                            formId = "form-name"
-                            inputNameId = "input-name"
-                            onchange = {(e) => {setName(e.target.value)}}
-                            readonly = {0}
-                        />
+                        <InputGroup className='mb-3'>
+                            <Button variant="secondary">Update name</Button>
+                            <FormControl
+                                name = "name"
+                                placeholder = {userInformations ? userInformations.name : null}
+                                id = "form-name"
+                                aria-describedby = "input-name"
+                                onChange = {(e) => {setName(e.target.value)}}
+                            />
+                        </InputGroup>
 
-                        <CustomInput
-                            name = "surname"
-                            inputName = "Surname: "
-                            placeholder = {userInformations ? userInformations.surname : null}
-                            formId = "form-surname"
-                            inputNameId = "input-surname"
-                            onchange = {(e) => {setSurname(e.target.value)}}
-                            readonly = {0}
-                        />
+                        <InputGroup className='mb-3'>
+                            <Button variant="secondary">Update Surname</Button>
+                            <FormControl
+                                name = "surname"
+                                placeholder = {userInformations ? userInformations.surname : null}
+                                id = "form-surname"
+                                aria-describedby = "input-surname"
+                                onChange = {(e) => {setSurname(e.target.value)}}
+                            />
+                        </InputGroup>
                         
-                        <CustomInput
-                            name = "email"
-                            inputName = "E-mail: "
-                            placeholder = {userInformations ? userInformations.email : null}
-                            formId = "form-email"
-                            inputNameId = "input-email"
-                            onchange = {(e) => {setEmail(e.target.value)}}
-                            readonly = {0}
-                        />
+                        <InputGroup className='mb-3'>
+                            <Button variant="secondary">Update e-mail</Button>
+                            <FormControl
+                                name = "email"
+                                placeholder = {userInformations ? userInformations.email : null}
+                                id = "form-email"
+                                aria-describedby = "input-email"
+                                onChange = {(e) => {setEmail(e.target.value)}}
+                            />
+                        </InputGroup>
 
-                        <CustomInput
-                            name = "phone"
-                            inputName = "Phone: "
-                            placeholder = {userInformations ? userInformations.phone : null}
-                            formId = "form-phone"
-                            inputNameId = "input-phone"
-                            onchange = {(e) => {setPhone(e.target.value)}}
-                            readonly = {0}
-                        />
+                        <InputGroup className='mb-3'>
+                            <Button variant="secondary">Update phone</Button>
+                            <FormControl
+                                name = "phone"
+                                placeholder = {userInformations ? userInformations.phone : null}
+                                id = "form-phone"
+                                aria-describedby = "input-phone"
+                                onChange = {(e) => {setPhone(e.target.value)}}
+                            />
+                        </InputGroup>
 
                         <Button onClick={updateUser} variant="info">Update All</Button>
                     </Col>

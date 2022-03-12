@@ -11,7 +11,7 @@ import { InputGroup, Form, FormControl } from 'react-bootstrap'
 
 function CustomInput(props){
     return(
-        <div>
+        <span   >
             {
                 props.labelName ?
                 <Form.Label htmlFor={props.formId}> {props.labelName} </Form.Label> :
@@ -30,11 +30,12 @@ function CustomInput(props){
                     id={props.formId} 
                     aria-describedby={props.inputNameId}
                     placeholder={props.placeholder}
+                    value={props.value}
                     onChange = {props.onchange}
                     readOnly = {props.readonly}
                 />
             </InputGroup>
-        </div>
+        </span>
     )
 }
 
