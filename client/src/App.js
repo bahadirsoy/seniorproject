@@ -14,23 +14,49 @@ import {
   BrowserRouter as Router,
   Routes,                   // Switch = Routes
   Route, 
-  Link
+  Link,
+  useInRouterContext
 } from 'react-router-dom'
 
+//import hooks
+import { createContext } from 'react';
+
+//import cookies
+import { useCookies } from 'react-cookie';
 
 
 function App() {
 
+  //cookies
+  const [usernameCookie, setUsernameCookie, removeUsernameCookie] = useCookies(['username']);
+  
   return (
     <div>
-      <Header></Header>
+
+      <Header 
+        usernameCookie = {usernameCookie.username}
+        setUsernameCookie = {setUsernameCookie}
+        removeUsernameCookie = {removeUsernameCookie}
+      />
 
       <Routes>
         <Route path='/' element={<HomePage/>}/>
-        <Route path='/signin' element={<SignInPage/>}/>
-        <Route path='/signup' element={<SignUpPage/>}/>
+        <Route path='/signin' element={
+          <SignInPage 
+            usernameCookie = {usernameCookie.username}
+            setUsernameCookie = {setUsernameCookie}
+          />
+        }/>
+        <Route path='/signup' element={
+          <SignUpPage 
+            usernameCookie = {usernameCookie.username} 
+            setUsernameCookie = {setUsernameCookie}
+          />}
+        />
         <Route path='/profile' element={<ProfilePage/>}/>
       </Routes>
+
+      
     </div>
   );
 }

@@ -17,11 +17,11 @@ import Axios from 'axios'
 //import navigate
 import { useNavigate } from 'react-router-dom';
 
-//import session
-import Session from 'react-session-api'
+//import session and cookies
+import { useCookies } from 'react-cookie';
 
 
-function SignInPage(){
+function SignInPage(props){
 
     //user inputs
     const [username, setUsername] = useState('')
@@ -41,11 +41,10 @@ function SignInPage(){
         }).then((response) => { //feedback from api
             //if succesful login
             if(response.data.isLoginSuccessful){
-                setLoginStatus(1)
+                //set cookies
+                props.setUsernameCookie("username", response.data.result[0].username)
 
-                //set sessions
-                Session.set("username", "soyisi")
-
+                //navigate user
                 navigate("/")
             } else if(!response.data.isLoginSuccessful){ //if unsuccesful login
                 setLoginStatus(0)
@@ -88,7 +87,7 @@ function SignInPage(){
                             onchange = {(e) => {setPassword(e.target.value)}}
                         />
 
-                        <Button onClick={login} variant="primary">Primary</Button>
+                        <Button onClick={login} variant="primary">Sign in</Button>
                     </Col>
 
                     <Col>

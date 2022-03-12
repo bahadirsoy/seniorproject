@@ -12,9 +12,14 @@ import {BrowserRouter} from 'react-router-dom'
 //import reactstrap
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
+//import cookies
+import { CookiesProvider } from 'react-cookie'
+
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <CookiesProvider>
+      <App />
+    </CookiesProvider>
   </BrowserRouter>,
   document.getElementById('root')
 );

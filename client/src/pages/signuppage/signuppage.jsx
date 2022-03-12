@@ -17,7 +17,12 @@ import Axios from 'axios'
 //import navigate
 import { useNavigate } from 'react-router-dom';
 
-function SignUpPage(){
+//import session
+import Session from 'react-session-api'
+
+
+
+function SignUpPage(props){
 
     //user inputs
     const [username, setUsername] = useState('')
@@ -37,10 +42,15 @@ function SignUpPage(){
         }).then((response) => { //feedback from api
             if(response.data.error){
                 if(response.data.error.sqlState == "23000"){ // if username is already taken
+                    //show user an error
                     setSignUpStatus(23000)
                 }
             } else{
-                setSignUpStatus(1)
+                //set cookies
+                props.setUsernameCookie("username", username)
+
+                //navigate user
+                navigate("/")
             }
         })
     }
@@ -94,7 +104,7 @@ function SignUpPage(){
                             onchange = {(e) => {setPassword(e.target.value)}}
                         />
 
-                        <Button onClick={insertUser} variant="primary">Primary</Button>
+                        <Button onClick={insertUser} variant="primary">Sign up</Button>
                     </Col>
 
                     <Col>

@@ -1,6 +1,6 @@
 
 //import react
-import React from 'react';
+import {React, useContext} from 'react';
 
 //import styles
 import './header.styles.css'
@@ -10,19 +10,20 @@ import { Link } from 'react-router-dom';
 
 //import session
 import Session from 'react-session-api'
+import { Cookies, useCookies } from 'react-cookie';
 
 //import navigate
 import { useNavigate } from 'react-router-dom';
 
 
-function Header(){
+function Header(props){
 
     //navigate
     const navigate = useNavigate()
 
     //logout function
     const logout = () => {
-        Session.clear()
+        props.removeUsernameCookie("username")
         navigate('/')
     }
 
@@ -30,24 +31,32 @@ function Header(){
         <div>
             <div className="header">
                 <a className="logo">CompanyLogo</a>
-                <a className="float-left">{Session.get("username")}</a>
+                <a className="float-left"> {props.usernameCookie} </a>
                 
                 <div className="header-right">
+
                     <Link to='/' className="active">
                         Home
                     </Link>
 
-                    <Link to="/signin">
-                        Sign in
-                    </Link>
+                    {
+                        props.usernameCookie ?
 
-                    <Link to="/signup">
-                        Sign up
-                    </Link>
+                        <Link to="/" onClick={logout}>
+                            Log out
+                        </Link> :
 
-                    <Link to="/" onClick={logout}>
-                        Log out
-                    </Link>
+                        <span>
+                            <Link to="/signin">
+                                Sign in
+                            </Link>
+
+                            <Link to="/signup">
+                                Sign up
+                            </Link>
+                        </span>
+                    }
+                    
                 </div>
             </div>
         </div>
