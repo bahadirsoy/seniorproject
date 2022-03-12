@@ -42,9 +42,15 @@ function Header(props){
                     {
                         props.usernameCookie ?
 
-                        <Link to="/" onClick={logout}>
-                            Log out
-                        </Link> :
+                        <span>
+                            <Link to="/profile">
+                                Profile
+                            </Link>
+
+                            <Link to="/" onClick={logout}>
+                                Log out
+                            </Link>
+                        </span> :
 
                         <span>
                             <Link to="/signin">
