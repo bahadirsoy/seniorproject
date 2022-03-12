@@ -39,6 +39,26 @@ function ProfilePage(props){
         })
     }
 
+    //update name
+    const updateName = () => {
+
+    }
+
+    //update name
+    const updateSurname = () => {
+
+    }
+
+    //update name
+    const updateEmail = () => {
+
+    }
+
+    //update name
+    const updatePhone = () => {
+
+    }
+
     //get user informations
     useEffect(() => {
         Axios.get("http://localhost:3001/api/getUserInformations", {
@@ -76,7 +96,7 @@ function ProfilePage(props){
                         />
 
                         <InputGroup className='mb-3'>
-                            <Button variant="secondary">Update name</Button>
+                            <Button onClick={updateName} variant="secondary">Update name</Button>
                             <FormControl
                                 name = "name"
                                 placeholder = {userInformations ? userInformations.name : null}
@@ -87,7 +107,7 @@ function ProfilePage(props){
                         </InputGroup>
 
                         <InputGroup className='mb-3'>
-                            <Button variant="secondary">Update Surname</Button>
+                            <Button onClick={updateSurname} variant="secondary">Update Surname</Button>
                             <FormControl
                                 name = "surname"
                                 placeholder = {userInformations ? userInformations.surname : null}
@@ -98,7 +118,7 @@ function ProfilePage(props){
                         </InputGroup>
                         
                         <InputGroup className='mb-3'>
-                            <Button variant="secondary">Update e-mail</Button>
+                            <Button onClick={updateEmail} variant="secondary">Update e-mail</Button>
                             <FormControl
                                 name = "email"
                                 placeholder = {userInformations ? userInformations.email : null}
@@ -109,7 +129,7 @@ function ProfilePage(props){
                         </InputGroup>
 
                         <InputGroup className='mb-3'>
-                            <Button variant="secondary">Update phone</Button>
+                            <Button onClick={updatePhone} variant="secondary">Update phone</Button>
                             <FormControl
                                 name = "phone"
                                 placeholder = {userInformations ? userInformations.phone : null}
