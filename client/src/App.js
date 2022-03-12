@@ -53,7 +53,11 @@ function App() {
             setUsernameCookie = {setUsernameCookie}
           />}
         />
-        <Route path='/profile' element={<ProfilePage/>}/>
+        <Route path='/profile' element={
+          <ProfilePage
+            usernameCookie = {usernameCookie.username}
+          />}
+        />
       </Routes>
 
       

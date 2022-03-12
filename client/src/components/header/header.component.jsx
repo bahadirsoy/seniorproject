@@ -31,7 +31,11 @@ function Header(props){
         <div>
             <div className="header">
                 <a className="logo">CompanyLogo</a>
-                <a className="float-left"> {props.usernameCookie} </a>
+                {
+                    props.usernameCookie ?
+                    <a className='float-left'> Welcome {props.usernameCookie} </a> :
+                    null
+                }
                 
                 <div className="header-right">
 
