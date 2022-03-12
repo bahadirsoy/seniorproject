@@ -9,7 +9,7 @@ import './profilepage.styles.css'
 import CustomInput from '../../components/custominput/custominput.component';
 
 //import react strap components
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 //import axios
 import Axios from 'axios'
@@ -25,6 +25,11 @@ function ProfilePage(props){
 
     //user informations
     const [userInformations, setUserInformations] = useState()
+
+    //update user function
+    const updateUser = () => {
+        console.log(name + " " + surname + " " + email + " " + phone)
+    }
 
     //get user informations
     useEffect(() => {
@@ -102,6 +107,8 @@ function ProfilePage(props){
                             onchange = {(e) => {setPhone(e.target.value)}}
                             readonly = {0}
                         />
+
+                        <Button onClick={updateUser} variant="info">Update</Button>
                     </Col>
 
                     <Col>
