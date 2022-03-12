@@ -17,6 +17,12 @@ import Axios from 'axios'
 
 function ProfilePage(props){
 
+    //states for inputs
+    const [name, setName] = useState('')
+    const [surname, setSurname] = useState('')
+    const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
+
     //user informations
     const [userInformations, setUserInformations] = useState()
 
@@ -29,7 +35,11 @@ function ProfilePage(props){
         })
         .then((response) => {
             setUserInformations({
-                username: response.data[0].username
+                username: response.data[0].username,
+                name: response.data[0].name,
+                surname: response.data[0].surname,
+                email: response.data[0].email,
+                phone: response.data[0].phone,
             })
         })
     }, [setUserInformations])
@@ -47,8 +57,50 @@ function ProfilePage(props){
 
                     <Col xs={10}>
                         <CustomInput
-                            inputName = "Username"
+                            inputName = "Username: "
                             placeholder = {userInformations ? userInformations.username : null}
+                            readonly = {1}
+                        />
+
+                        
+                        <CustomInput
+                            name = "name"
+                            inputName = "Name: "
+                            placeholder = {userInformations ? userInformations.name : null}
+                            formId = "form-name"
+                            inputNameId = "input-name"
+                            onchange = {(e) => {setName(e.target.value)}}
+                            readonly = {0}
+                        />
+
+                        <CustomInput
+                            name = "surname"
+                            inputName = "Surname: "
+                            placeholder = {userInformations ? userInformations.surname : null}
+                            formId = "form-surname"
+                            inputNameId = "input-surname"
+                            onchange = {(e) => {setSurname(e.target.value)}}
+                            readonly = {0}
+                        />
+                        
+                        <CustomInput
+                            name = "email"
+                            inputName = "E-mail: "
+                            placeholder = {userInformations ? userInformations.email : null}
+                            formId = "form-email"
+                            inputNameId = "input-email"
+                            onchange = {(e) => {setEmail(e.target.value)}}
+                            readonly = {0}
+                        />
+
+                        <CustomInput
+                            name = "phone"
+                            inputName = "Phone: "
+                            placeholder = {userInformations ? userInformations.phone : null}
+                            formId = "form-phone"
+                            inputNameId = "input-phone"
+                            onchange = {(e) => {setPhone(e.target.value)}}
+                            readonly = {0}
                         />
                     </Col>
 

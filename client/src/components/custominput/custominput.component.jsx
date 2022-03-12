@@ -31,6 +31,7 @@ function CustomInput(props){
                     aria-describedby={props.inputNameId}
                     placeholder={props.placeholder}
                     onChange = {props.onchange}
+                    readOnly = {props.readonly}
                 />
             </InputGroup>
         </div>
