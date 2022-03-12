@@ -28,7 +28,15 @@ function ProfilePage(props){
 
     //update user function
     const updateUser = () => {
-        console.log(name + " " + surname + " " + email + " " + phone)
+        Axios.put("http://localhost:3001/api/updateUser", {
+            name: name,
+            surname: surname,
+            email: email,
+            phone: phone,
+            username: userInformations.username
+        }).then((response) => {
+            console.log(response)
+        })
     }
 
     //get user informations
@@ -47,7 +55,7 @@ function ProfilePage(props){
                 phone: response.data[0].phone,
             })
         })
-    }, [setUserInformations])
+    }, [])
 
     return(
         <div className='mt-5'>
@@ -57,7 +65,7 @@ function ProfilePage(props){
                     <h1 className='mb-5'>Profile Page</h1>
 
                     <Col>
-                        
+                        {console.log(1)}
                     </Col>
 
                     <Col xs={10}>
@@ -108,7 +116,7 @@ function ProfilePage(props){
                             readonly = {0}
                         />
 
-                        <Button onClick={updateUser} variant="info">Update</Button>
+                        <Button onClick={updateUser} variant="info">Update All</Button>
                     </Col>
 
                     <Col>
