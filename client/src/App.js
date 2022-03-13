@@ -42,7 +42,11 @@ function App() {
       />
 
       <Routes>
-        <Route path='/' element={<HomePage/>}/>
+        <Route path='/' element={
+          <HomePage
+            usernameCookie = {usernameCookie.username}
+          />
+        }/>
         <Route path='/signin' element={
           <SignInPage 
             usernameCookie = {usernameCookie.username}

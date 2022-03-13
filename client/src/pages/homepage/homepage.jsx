@@ -10,13 +10,15 @@ import SharePostPanel from '../../components/sharepostpanel/sharepostpanel.compo
 import Post from '../../components/post/post.component';
 
 
-function HomePage(){
+function HomePage(props){
     return(
         <div>
             Homepage
-
+            
             <SharePostPanel />
-            <Post />
+            <Post 
+                usernameCookie = {props.usernameCookie}
+            />
 
         </div>
     )
