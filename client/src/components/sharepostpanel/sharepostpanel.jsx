@@ -1,6 +1,6 @@
 
 //import react
-import React from 'react';
+import React, { useState } from 'react';
 
 //import styles
 import './sharepostpanel.styles.css'
@@ -14,11 +14,20 @@ import { faImage } from '@fortawesome/free-solid-svg-icons'
 
 
 function SharePostPanel(){
+
+    //user input
+    const [postContent, updatePostContent] = useState('')
+
+    //insert post to db
+    const insertPost = () => {
+        console.log("inserted")
+    }
+
     return(
         <Container>
             <Row>
                 <div className="panel-content panel-activity">
-                    <form action="#" className="panel-activity__status">
+                    <div className="panel-activity__status">
                         <textarea name="user_activity" placeholder="Share what you've been up to..." className="form-control"></textarea>
                         <div className="actions">
                             <div className="btn-group">
@@ -35,11 +44,11 @@ function SharePostPanel(){
                                     <FontAwesomeIcon color='white' size="lg" icon={faImage} />
                                 </a>
                             </div>
-                            <button type="submit" className="btn btn-sm btn-rounded btn-info">
+                            <button onClick={insertPost} className="btn btn-sm btn-rounded btn-info">
                                 Post
                             </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </Row>
         </Container>
