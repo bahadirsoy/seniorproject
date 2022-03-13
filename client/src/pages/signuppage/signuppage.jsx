@@ -52,8 +52,9 @@ function SignUpPage(props){
                     setSignUpStatus(23000)
                 }
             } else{
+                console.log(response.data)
                 //set cookies
-                props.setUsernameCookie("cookies", username)
+                props.setUsernameCookie("username", username)
 
                 //navigate user
                 navigate("/")

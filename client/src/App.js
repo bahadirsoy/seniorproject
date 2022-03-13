@@ -19,7 +19,7 @@ import {
 } from 'react-router-dom'
 
 //import hooks
-import { createContext } from 'react';
+import { createContext, useEffect } from 'react';
 
 //import cookies
 import { useCookies } from 'react-cookie';
@@ -28,34 +28,36 @@ import { useCookies } from 'react-cookie';
 function App() {
 
   //cookies
-  const [usernameCookie, setUsernameCookie, removeUsernameCookie] = useCookies(['cookies']);
-  
+  const [usernameCookie, setUsernameCookie, removeUsernameCookie] = useCookies(['username']);
+  const [userIdCookie, setUserIdCookie, removeUserIdCookie] = useCookies(['userId']);
+
   return (
     <div>
 
       <Header 
-        usernameCookie = {usernameCookie.cookies}
+        usernameCookie = {usernameCookie.username}
         setUsernameCookie = {setUsernameCookie}
         removeUsernameCookie = {removeUsernameCookie}
+        userIdCookie = {userIdCookie.userId}
       />
 
       <Routes>
         <Route path='/' element={<HomePage/>}/>
         <Route path='/signin' element={
           <SignInPage 
-            usernameCookie = {usernameCookie.cookies}
+            usernameCookie = {usernameCookie.username}
             setUsernameCookie = {setUsernameCookie}
           />
         }/>
         <Route path='/signup' element={
           <SignUpPage 
-            usernameCookie = {usernameCookie.cookies} 
+            usernameCookie = {usernameCookie.username} 
             setUsernameCookie = {setUsernameCookie}
           />}
         />
         <Route path='/profile' element={
           <ProfilePage
-            usernameCookie = {usernameCookie.cookies}
+            usernameCookie = {usernameCookie.username}
           />}
         />
       </Routes>

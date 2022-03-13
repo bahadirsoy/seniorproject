@@ -42,7 +42,8 @@ function SignInPage(props){
             //if succesful login
             if(response.data.isLoginSuccessful){
                 //set cookies
-                props.setUsernameCookie("cookies", response.data.result[0].username)
+                props.setUsernameCookie("username", response.data.result[0].username)
+                props.setUsernameCookie("userId", response.data.result[0].userId)
 
                 //navigate user
                 navigate("/")

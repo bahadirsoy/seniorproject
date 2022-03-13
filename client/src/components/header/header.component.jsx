@@ -23,7 +23,8 @@ function Header(props){
 
     //logout function
     const logout = () => {
-        props.removeUsernameCookie("cookies")
+        props.removeUsernameCookie("username")
+        props.removeUsernameCookie("userId")
         navigate('/')
     }
 
@@ -33,7 +34,7 @@ function Header(props){
                 <a className="logo">CompanyLogo</a>
                 {
                     props.usernameCookie ?
-                    <a className='float-left'> Welcome {props.usernameCookie} </a> :
+                    <a className='float-left'> {props.userIdCookie} Welcome {props.usernameCookie} </a> :
                     null
                 }
                 

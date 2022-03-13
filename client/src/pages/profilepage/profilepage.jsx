@@ -9,16 +9,13 @@ import './profilepage.styles.css'
 import CustomInput from '../../components/custominput/custominput.component';
 
 //import react strap components
-import { Container, Row, Col, Button, InputGroup, FormControl, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Button, InputGroup, FormControl } from 'react-bootstrap';
 
 //import axios
 import Axios from 'axios'
 
 
 function ProfilePage(props){
-
-    //update status
-    const [updateStatus, setUpdateStatus] = useState('')
 
     //states for inputs
     const [name, setName] = useState('')
@@ -38,12 +35,7 @@ function ProfilePage(props){
             phone: phone,
             username: userInformations.username
         }).then((response) => {
-            if(response.status != 200){
-                console.log(response.status)
-                setUpdateStatus(0)
-            } else{
-                setUpdateStatus(1)
-            }
+            console.log(response)
         })
     }
 
@@ -53,12 +45,7 @@ function ProfilePage(props){
             name: name,
             username: userInformations.username
         }).then((response) => {
-            if(response.status != 200){
-                console.log(response.status)
-                setUpdateStatus(0)
-            } else{
-                setUpdateStatus(1)
-            }
+            console.log(response)
         })
     }
 
@@ -68,12 +55,7 @@ function ProfilePage(props){
             surname: surname,
             username: userInformations.username
         }).then((response) => {
-            if(response.status != 200){
-                console.log(response.status)
-                setUpdateStatus(0)
-            } else{
-                setUpdateStatus(1)
-            }
+            console.log(response)
         })
     }
 
@@ -83,12 +65,7 @@ function ProfilePage(props){
             email: email,
             username: userInformations.username
         }).then((response) => {
-            if(response.status != 200){
-                console.log(response.status)
-                setUpdateStatus(0)
-            } else{
-                setUpdateStatus(1)
-            }
+            console.log(response)
         })
     }
 
@@ -98,12 +75,7 @@ function ProfilePage(props){
             phone: phone,
             username: userInformations.username
         }).then((response) => {
-            if(response.status != 200){
-                console.log(response.status)
-                setUpdateStatus(0)
-            } else{
-                setUpdateStatus(1)
-            }
+            console.log(response)
         })
     }
 
@@ -137,21 +109,6 @@ function ProfilePage(props){
                     </Col>
 
                     <Col xs={10}>
-
-                        
-                        {
-                            updateStatus ?
-
-                            <Alert variant="success">
-                            <Alert.Heading>Success!</Alert.Heading>
-                                <p>
-                                    You updated successfully!
-                                </p>
-                            </Alert> :
-
-                            null
-                        }
-
                         <CustomInput
                             inputName = "Username: "
                             placeholder = {userInformations ? userInformations.username : null}
