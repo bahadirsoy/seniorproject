@@ -42,7 +42,7 @@ function SignInPage(props){
             //if succesful login
             if(response.data.isLoginSuccessful){
                 //set cookies
-                props.setUsernameCookie("username", response.data.result[0].username)
+                props.setUsernameCookie("cookies", response.data.result[0].username)
 
                 //navigate user
                 navigate("/")

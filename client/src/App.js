@@ -28,13 +28,13 @@ import { useCookies } from 'react-cookie';
 function App() {
 
   //cookies
-  const [usernameCookie, setUsernameCookie, removeUsernameCookie] = useCookies(['username']);
+  const [usernameCookie, setUsernameCookie, removeUsernameCookie] = useCookies(['cookies']);
   
   return (
     <div>
 
       <Header 
-        usernameCookie = {usernameCookie.username}
+        usernameCookie = {usernameCookie.cookies}
         setUsernameCookie = {setUsernameCookie}
         removeUsernameCookie = {removeUsernameCookie}
       />
@@ -43,19 +43,19 @@ function App() {
         <Route path='/' element={<HomePage/>}/>
         <Route path='/signin' element={
           <SignInPage 
-            usernameCookie = {usernameCookie.username}
+            usernameCookie = {usernameCookie.cookies}
             setUsernameCookie = {setUsernameCookie}
           />
         }/>
         <Route path='/signup' element={
           <SignUpPage 
-            usernameCookie = {usernameCookie.username} 
+            usernameCookie = {usernameCookie.cookies} 
             setUsernameCookie = {setUsernameCookie}
           />}
         />
         <Route path='/profile' element={
           <ProfilePage
-            usernameCookie = {usernameCookie.username}
+            usernameCookie = {usernameCookie.cookies}
           />}
         />
       </Routes>

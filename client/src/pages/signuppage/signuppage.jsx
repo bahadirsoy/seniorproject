@@ -53,7 +53,7 @@ function SignUpPage(props){
                 }
             } else{
                 //set cookies
-                props.setUsernameCookie("username", username)
+                props.setUsernameCookie("cookies", username)
 
                 //navigate user
                 navigate("/")

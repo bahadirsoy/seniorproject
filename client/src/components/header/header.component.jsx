@@ -23,7 +23,7 @@ function Header(props){
 
     //logout function
     const logout = () => {
-        props.removeUsernameCookie("username")
+        props.removeUsernameCookie("cookies")
         navigate('/')
     }
 
