@@ -6,7 +6,8 @@ import React from 'react';
 import './homepage.styles.css'
 
 //import custom components
-import SharePostPanel from '../../components/sharepostpanel/sharepostpanel';
+import SharePostPanel from '../../components/sharepostpanel/sharepostpanel.component';
+import Post from '../../components/post/post.component';
 
 
 function HomePage(){
@@ -14,7 +15,9 @@ function HomePage(){
         <div>
             Homepage
 
-            <SharePostPanel/ >
+            <SharePostPanel />
+            <Post />
+
         </div>
     )
 }
