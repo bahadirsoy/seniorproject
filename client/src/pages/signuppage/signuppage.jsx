@@ -52,7 +52,17 @@ function SignUpPage(props){
                     setSignUpStatus(23000)
                 }
             } else{
-                console.log(response.data)
+                //get id of user
+                Axios.get("http://localhost:3001/api/getId", {
+                    params: {
+                        username: username
+                    }
+                })
+                .then((response) => {
+                    //set userId cookie after signed up
+                    props.setUserIdCookie("userId", response.data[0].userId)
+                })
+
                 //set cookies
                 props.setUsernameCookie("username", username)
 

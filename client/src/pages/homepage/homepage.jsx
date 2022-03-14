@@ -19,19 +19,24 @@ function HomePage(props){
 
     //get all posts from DB with useeffect
     useEffect(() => {
+        getPosts()
+    }, [])
+
+    //get all posts from db
+    const getPosts = () => {
         Axios.get("http://localhost:3001/api/getPosts", {
             params: {
-                username: props.usernameCookie
+                userId: props.userIdCookie
             }
         })
         .then((response) => {
-
+            console.log(response)
         })
-    }, [])
+    }
 
     return(
         <div>
-            Homepage
+            Homepage {props.userIdCookie}
             
             <SharePostPanel />
             <Post 

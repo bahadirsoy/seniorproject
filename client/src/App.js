@@ -45,6 +45,7 @@ function App() {
         <Route path='/' element={
           <HomePage
             usernameCookie = {usernameCookie.username}
+            userIdCookie = {userIdCookie.userId}
           />
         }/>
         <Route path='/signin' element={
@@ -57,6 +58,7 @@ function App() {
           <SignUpPage 
             usernameCookie = {usernameCookie.username} 
             setUsernameCookie = {setUsernameCookie}
+            setUserIdCookie = {setUserIdCookie}
           />}
         />
         <Route path='/profile' element={
