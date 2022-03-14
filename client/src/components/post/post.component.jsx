@@ -8,27 +8,11 @@ import './post.styles.css'
 //import reactstrap components
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
-//import axios for api request
-import Axios from 'axios'
 
 
 function Post(props){
 
-    //posts
-    const [posts, setPosts] = useState()
-
-    //get all posts from DB with useeffect
-    useEffect(() => {
-        Axios.get("http://localhost:3001/api/getPosts", {
-            params: {
-                username: props.usernameCookie
-            }
-        })
-        .then((response) => {
-
-        })
-    }, [])
-
+    
     return(
         <Container>
             <Row>

@@ -63,7 +63,7 @@ app.post('/api/insertUser', (req, res) => {
             if(error){ //if there is an error while adding new user into db
                 res.send({error: error})
             } else{ //there is no error send empty response
-                console.log("new user is added")
+                console.log(result)
                 res.send()
             }
     })
