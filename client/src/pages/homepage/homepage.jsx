@@ -15,7 +15,10 @@ import Axios from 'axios'
 function HomePage(props){
 
     //posts
-    const [posts, setPosts] = useState()
+    const [posts, setPosts] = useState([])
+
+    //check if data is fetched
+    const [isLoading, setIsLoading] = useState(0)
 
     //get all posts from DB with useeffect
     useEffect(() => {
@@ -30,7 +33,10 @@ function HomePage(props){
             }
         })
         .then((response) => {
-            console.log(response)
+            response.data.map((post) => {
+                posts.push(post)
+            })
+            setIsLoading(1)
         })
     }
 
@@ -39,9 +45,21 @@ function HomePage(props){
             Homepage {props.userIdCookie}
             
             <SharePostPanel />
-            <Post 
-                usernameCookie = {props.usernameCookie}
-            />
+            
+            {
+                isLoading ?
+                posts.map((info) => {
+                    console.log(info)
+                    return(
+                        <Post 
+                            key = {info.postId}
+                            postContent = {info.postContent}
+                            postTime = {info.postTime}
+                            userId = {info.userId}
+                        />)
+                }) :
+                "Loading..."
+            }
 
         </div>
     )

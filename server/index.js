@@ -23,6 +23,52 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 
 
+//get id of user when he signed up
+app.get('/api/getId', (req, res) => {
+
+    //username
+    const username = req.query.username
+
+    sql = "SELECT userId FROM seniorprojectdbschema.user WHERE username = ?"
+    db.query(
+        sql, 
+        [username], 
+        (error, result) => {
+            if(error){
+                console.log(error)
+                res.send(error)
+            } else{
+                res.send(result)
+            }
+        }
+    )
+
+})
+
+
+//get all posts from db and send it to homepage
+app.get('/api/getPosts', (req, res) => {
+
+    //username
+    const userId = req.query.userId
+
+    sql = "SELECT * FROM seniorprojectdbschema.post WHERE userId = ?"
+    db.query(
+        sql, 
+        [userId], 
+        (error, result) => {
+            if(error){
+                console.log(error)
+                res.send(error)
+            } else{
+                res.send(result)
+            }
+        }
+    )
+})
+
+
+//get user informations in profile page
 app.get('/api/getUserInformations', (req, res) => {
 
     //username
