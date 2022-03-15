@@ -44,7 +44,9 @@ function HomePage(props){
         <div>
             Homepage {props.userIdCookie}
             
-            <SharePostPanel />
+            <SharePostPanel
+                userIdCookie = {props.userIdCookie}
+            />
             
             {
                 isLoading ?

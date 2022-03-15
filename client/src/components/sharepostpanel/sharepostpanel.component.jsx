@@ -12,16 +12,15 @@ import { Container, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
 
+//import axios
+import Axios from 'axios'
 
-function SharePostPanel(){
 
-    //hold image
+function SharePostPanel(props){
+
+    //hold post variables
+    const [postContent, setPostContent] = useState('')
     const [image, setImage] = useState()
-
-    //insert post to db
-    const insertPost = () => {
-        console.log("inserted")
-    }
 
     const onImageChange = event => {
         if (event.target.files && event.target.files[0]) {
@@ -31,7 +30,15 @@ function SharePostPanel(){
     };
 
     //upload post to db
-    
+    const insertPost = () => {
+        Axios.post('http://localhost:3001/api/insertPost', {
+            userId: props.userIdCookie,
+            postContent: postContent,
+            postImg: image
+        }).then((response) => { //feedback from api
+            console.log(response)
+        })
+    }
 
 
     return(
@@ -40,7 +47,12 @@ function SharePostPanel(){
             <Row>
                 <div className="panel-content panel-activity">
                     <div className="panel-activity__status">
-                        <textarea name="user_activity" placeholder="Share what you've been up to..." className="form-control"></textarea>
+                        <textarea 
+                            name="user_activity" 
+                            placeholder="Share what you've been up to..."
+                            className="form-control"
+                            onChange = {(e) => {setPostContent(e.target.value)}}>
+                        </textarea>
                         <div className="actions">
                             <div className="btn-group">
                                 <input type="file" name="myImage" onChange={onImageChange} />

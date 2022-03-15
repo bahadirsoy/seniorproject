@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 
 
+
 //get id of user when he signed up
 app.get('/api/getId', (req, res) => {
 
@@ -86,6 +87,26 @@ app.get('/api/getUserInformations', (req, res) => {
             }
     })
 
+})
+
+//insert new post
+app.post('/api/insertPost', (req, res) => {
+    const userId = req.body.userId
+    const postContent = req.body.postContent
+    const postImg = req.body.postImg
+
+    sql = "INSERT INTO seniorprojectdbschema.post (userId, postContent, postImg) VALUES (?, ?, ?)"
+    db.query(sql, 
+        [userId, postContent, postImg], 
+        (error, result) => {
+            if(error){
+                console.log(error)
+                res.send(result)
+            } else{
+                res.send(result)
+            }
+        }
+    )
 })
 
 
