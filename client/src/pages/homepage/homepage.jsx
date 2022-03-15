@@ -49,7 +49,6 @@ function HomePage(props){
             {
                 isLoading ?
                 posts.map((info) => {
-                    console.log(info)
                     return(
                         <Post 
                             key = {info.postId}

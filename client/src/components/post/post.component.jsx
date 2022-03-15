@@ -12,6 +12,7 @@ import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
 function Post(props){
 
+    //get username with userId so that username can be shown in post components
     
     return(
         <Container>

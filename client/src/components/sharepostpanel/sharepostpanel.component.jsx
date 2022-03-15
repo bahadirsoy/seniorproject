@@ -15,25 +15,35 @@ import { faImage } from '@fortawesome/free-solid-svg-icons'
 
 function SharePostPanel(){
 
-    //user input
-    const [postContent, updatePostContent] = useState('')
+    //hold image
+    const [image, setImage] = useState()
 
     //insert post to db
     const insertPost = () => {
         console.log("inserted")
     }
 
+    const onImageChange = event => {
+        if (event.target.files && event.target.files[0]) {
+          const img = event.target.files[0];
+          setImage(URL.createObjectURL(img))
+        }
+    };
+
+    //upload post to db
+    
+
+
     return(
         <Container>
+            <img src={image} />
             <Row>
                 <div className="panel-content panel-activity">
                     <div className="panel-activity__status">
                         <textarea name="user_activity" placeholder="Share what you've been up to..." className="form-control"></textarea>
                         <div className="actions">
                             <div className="btn-group">
-                                <a type="button" className="btn-link" title="" data-toggle="tooltip" data-original-title="Post an Image">
-                                    <FontAwesomeIcon color='white' size="lg" icon={faImage} />
-                                </a>
+                                <input type="file" name="myImage" onChange={onImageChange} />
                                 <a type="button" className="btn-link" title="" data-toggle="tooltip" data-original-title="Post an Video">
                                     <FontAwesomeIcon color='white' size="lg" icon={faImage} />
                                 </a>
