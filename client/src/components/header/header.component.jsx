@@ -52,6 +52,10 @@ function Header(props){
                                 Profile
                             </Link>
 
+                            <Link to="/activities">
+                                Activities
+                            </Link>
+
                             <Link to="/" onClick={logout}>
                                 Log out
                             </Link>

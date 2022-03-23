@@ -51,11 +51,14 @@ function HomePage(props){
             {
                 isLoading ?
                 posts.map((info) => {
+                    //console.log(info.postImg ? info.postImg.data : null)
+                    
                     return(
                         <Post 
                             key = {info.postId}
                             postContent = {info.postContent}
                             postTime = {info.postTime}
+                            
                             userId = {info.userId}
                         />)
                 }) :

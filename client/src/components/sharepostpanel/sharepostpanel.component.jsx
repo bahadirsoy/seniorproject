@@ -20,21 +20,13 @@ function SharePostPanel(props){
 
     //hold post variables
     const [postContent, setPostContent] = useState('')
-    const [image, setImage] = useState()
 
-    const onImageChange = event => {
-        if (event.target.files && event.target.files[0]) {
-          const img = event.target.files[0];
-          setImage(URL.createObjectURL(img))
-        }
-    };
 
     //upload post to db
     const insertPost = () => {
         Axios.post('http://localhost:3001/api/insertPost', {
             userId: props.userIdCookie,
-            postContent: postContent,
-            postImg: image
+            postContent: postContent
         }).then((response) => { //feedback from api
             console.log(response)
         })
@@ -43,7 +35,6 @@ function SharePostPanel(props){
 
     return(
         <Container>
-            <img src={image} />
             <Row>
                 <div className="panel-content panel-activity">
                     <div className="panel-activity__status">
@@ -55,7 +46,6 @@ function SharePostPanel(props){
                         </textarea>
                         <div className="actions">
                             <div className="btn-group">
-                                <input type="file" name="myImage" onChange={onImageChange} />
                                 <a type="button" className="btn-link" title="" data-toggle="tooltip" data-original-title="Post an Video">
                                     <FontAwesomeIcon color='white' size="lg" icon={faImage} />
                                 </a>

@@ -93,11 +93,10 @@ app.get('/api/getUserInformations', (req, res) => {
 app.post('/api/insertPost', (req, res) => {
     const userId = req.body.userId
     const postContent = req.body.postContent
-    const postImg = req.body.postImg
 
-    sql = "INSERT INTO seniorprojectdbschema.post (userId, postContent, postImg) VALUES (?, ?, ?)"
+    sql = "INSERT INTO seniorprojectdbschema.post (userId, postContent) VALUES (?, ?)"
     db.query(sql, 
-        [userId, postContent, postImg], 
+        [userId, postContent], 
         (error, result) => {
             if(error){
                 console.log(error)
