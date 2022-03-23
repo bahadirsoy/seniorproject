@@ -50,13 +50,10 @@ app.get('/api/getId', (req, res) => {
 //get all posts from db and send it to homepage
 app.get('/api/getPosts', (req, res) => {
 
-    //username
-    const userId = req.query.userId
 
-    sql = "SELECT * FROM seniorprojectdbschema.post WHERE userId = ?"
+    sql = "SELECT * FROM seniorprojectdbschema.post"
     db.query(
         sql, 
-        [userId], 
         (error, result) => {
             if(error){
                 console.log(error)

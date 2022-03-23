@@ -28,9 +28,7 @@ function HomePage(props){
     //get all posts from db
     const getPosts = () => {
         Axios.get("http://localhost:3001/api/getPosts", {
-            params: {
-                userId: props.userIdCookie
-            }
+            
         })
         .then((response) => {
             response.data.map((post) => {
