@@ -8,11 +8,26 @@ import './post.styles.css'
 //import reactstrap components
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
+//import axios for api request
+import Axios from 'axios'
+
 
 
 function Post(props){
 
+    const [username, setUsername] = useState('')
+
     //get username with userId so that username can be shown in post components
+    useEffect(() => {
+        Axios.get("http://localhost:3001/api/getUsernameFromId", {
+            params: {
+                userId: props.userId
+            }
+        })
+        .then((response) => {
+            setUsername(response.data[0].username)
+        })
+    }, [])
     
     return(
         <Container>
@@ -20,7 +35,7 @@ function Post(props){
                 <Col>
                     <Card className="mt-5">
                     <Card.Body>
-                        <Card.Title>Card title</Card.Title>
+                        <Card.Title> {username} </Card.Title>
                         <Card.Text className='mt-4'>
                             {props.postContent}
                         </Card.Text>

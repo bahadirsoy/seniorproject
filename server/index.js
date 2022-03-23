@@ -47,6 +47,28 @@ app.get('/api/getId', (req, res) => {
 })
 
 
+//get username from id of the user
+app.get('/api/getUsernameFromId', (req, res) => {
+
+    //username
+    const userId = req.query.userId
+    
+    sql = "SELECT username FROM seniorprojectdbschema.user WHERE userId = ?"
+    db.query(
+        sql, 
+        [userId], 
+        (error, result) => {
+            if(error){
+                console.log(error)
+            } else{
+                res.send(result)
+            }
+        }
+    )
+
+})
+
+
 //get all posts from db and send it to homepage
 app.get('/api/getPosts', (req, res) => {
 
