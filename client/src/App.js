@@ -67,7 +67,7 @@ function App() {
             usernameCookie = {usernameCookie.username}
           />}
         />
-        <Route path='/userInformations' element={
+        <Route path='/userInformations/:username' element={
           <UserInformations
             
           />}

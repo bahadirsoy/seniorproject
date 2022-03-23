@@ -18,7 +18,9 @@ import { Link } from 'react-router-dom';
 
 function Post(props){
 
+    //username is fetched with useeffect using userId
     const [username, setUsername] = useState('')
+    
 
     //get username with userId so that username can be shown in post components
     useEffect(() => {
@@ -47,7 +49,7 @@ function Post(props){
                             
                         />
                         <div className='mt-4'>
-                        <Link to="/userInformations">
+                        <Link to={`/userInformations/${username}`}>
                             <Button>
                                 Profile
                             </Button>

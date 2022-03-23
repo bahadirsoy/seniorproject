@@ -14,16 +14,43 @@ import { Container, Row, Col, Button, InputGroup, FormControl } from 'react-boot
 //import axios
 import Axios from 'axios'
 
+//import react router
+import { useParams } from 'react-router-dom';
+
 
 function UserInformations(props){
+    
+    //username parameter for userinformations page. It will be used for fetchined specific user information
+    const { username } = useParams();
+
+    //user informations
+    const [userInformations, setUserInformations] = useState()
+
+    //specific user information using username which is link parameter
+    useEffect(() => {
+        Axios.get("http://localhost:3001/api/getUserInformations", {
+            params: {
+                username: username
+            }
+        })
+        .then((response) => {
+            setUserInformations({
+                username: response.data[0].username,
+                name: response.data[0].name,
+                surname: response.data[0].surname,
+                email: response.data[0].email,
+                phone: response.data[0].phone,
+            })
+        })
+    }, [])
 
     return(
         <div className='mt-5'>
             <Container>
                 <Row>
-
+                    
                     <h1 className='mb-5'>User Informations</h1>
-
+                    
                     <Col>
                         
                     </Col>
@@ -31,45 +58,33 @@ function UserInformations(props){
                     <Col xs={10}>
                         <CustomInput
                             inputName = "Username: "
-                            placeholder = "username"
+                            placeholder = {userInformations ? userInformations.username : null}
                             readonly = {1}
                         />
 
-                        <InputGroup className='mb-3'>
-                            <FormControl
-                                name = "name"
-                                placeholder = "name"
-                                id = "form-name"
-                                aria-describedby = "input-name"
-                            />
-                        </InputGroup>
+                        <CustomInput
+                            inputName = "Name: "
+                            placeholder = {userInformations ? userInformations.name : null}
+                            readonly = {1}
+                        />
 
-                        <InputGroup className='mb-3'>
-                            <FormControl
-                                name = "surname"
-                                placeholder = "surname"
-                                id = "form-surname"
-                                aria-describedby = "input-surname"
-                            />
-                        </InputGroup>
+                        <CustomInput
+                            inputName = "Surname: "
+                            placeholder = {userInformations ? userInformations.surname : null}
+                            readonly = {1}
+                        />
                         
-                        <InputGroup className='mb-3'>
-                            <FormControl
-                                name = "email"
-                                placeholder = "email"
-                                id = "form-email"
-                                aria-describedby = "input-email"
-                            />
-                        </InputGroup>
+                        <CustomInput
+                            inputName = "E-mail: "
+                            placeholder = {userInformations ? userInformations.email : null}
+                            readonly = {1}
+                        />
 
-                        <InputGroup className='mb-3'>
-                            <FormControl
-                                name = "phone"
-                                placeholder = "phone"
-                                id = "form-phone"
-                                aria-describedby = "input-phone"
-                            />
-                        </InputGroup>
+                        <CustomInput
+                            inputName = "Phone: "
+                            placeholder = {userInformations ? userInformations.phone : null}
+                            readonly = {1}
+                        />
                     </Col>
 
                     <Col>
