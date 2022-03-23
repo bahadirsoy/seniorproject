@@ -39,12 +39,48 @@ function SignUpPage(props){
 
     //insert user api request
     const insertUser = () => {
+        //trim all inputs
+        const trimmedUsername = username.trim()
+        const trimmedName = name.trim()
+        const trimmedSurname = surname.trim()
+        const trimmedEmail = email.trim()
+
+        //check if passed variable contains any special char
+        const checkSpecialCharacter = (variable) => {
+            var pattern = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/); //unacceptable chars
+            if (pattern.test(variable)) {
+                return false;
+            }
+            return true; //good user input
+        }
+
+        //check if email is in correct format
+        const validateEmail = (mail) => {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)){
+            return true
+        }
+            return false
+        }
+
+        //check if all inputs are filled
+        if(trimmedUsername == "" || !trimmedUsername || trimmedName == "" || !trimmedName || trimmedSurname == "" || !trimmedSurname || trimmedEmail == "" || !trimmedEmail){
+            setSignUpStatus("emptyField")
+            return
+        } else if(!checkSpecialCharacter(trimmedUsername) || !checkSpecialCharacter(trimmedName) || !checkSpecialCharacter(trimmedSurname) || !checkSpecialCharacter(trimmedEmail)){ //check if there is special chars in inputs
+            setSignUpStatus("specialChar")
+            return
+        } else if(!validateEmail(trimmedEmail)){ //check if email is in correct format
+            setSignUpStatus("wrongEmailFormat")
+            return
+        } else{
+            
+        }
         Axios.post('http://localhost:3001/api/insertUser', {
-            username: username, 
+            username: trimmedUsername, 
             password: password,
-            name: name,
-            surname: surname,
-            email: email
+            name: trimmedName,
+            surname: trimmedSurname,
+            email: trimmedEmail
         }).then((response) => { //feedback from api
             if(response.data.error){
                 if(response.data.error.sqlState == "23000"){ // if username is already taken
@@ -95,9 +131,38 @@ function SignUpPage(props){
                                 <p>
                                     Please sign up with another username
                                 </p>
+                            </Alert> : 
+                            
+                            signUpStatus == "emptyField" ?
+
+                            <Alert variant="danger">
+                            <Alert.Heading>Empty fields!</Alert.Heading>
+                                <p>
+                                    Please fill all inputs
+                                </p>
+                            </Alert> : 
+                            
+                            signUpStatus == "specialChar" ?
+
+                            <Alert variant="danger">
+                            <Alert.Heading>Special Characters</Alert.Heading>
+                                <p>
+                                    Your username, password, name, surname and email cannot contain any special char
+                                </p>
+                            </Alert> :
+
+                            signUpStatus == "wrongEmailFormat" ?
+
+                            <Alert variant="danger">
+                            <Alert.Heading>Wrong E-mail format!</Alert.Heading>
+                                <p>
+                                    Please make seure that you have entered valid email
+                                </p>
                             </Alert> :
 
                             null
+                            
+
                         }
                     
                         <CustomInput
