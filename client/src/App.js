@@ -8,6 +8,7 @@ import HomePage from './pages/homepage/homepage';
 import SignInPage from './pages/signinpage/signinpage';
 import SignUpPage from './pages/signuppage/signuppage';
 import ProfilePage from './pages/profilepage/profilepage';
+import UserInformations from './pages/userinformationspage/userinformationspage';
 
 //import react router components
 import {
@@ -64,6 +65,11 @@ function App() {
         <Route path='/profile' element={
           <ProfilePage
             usernameCookie = {usernameCookie.username}
+          />}
+        />
+        <Route path='/userInformations' element={
+          <UserInformations
+            
           />}
         />
       </Routes>

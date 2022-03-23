@@ -11,6 +11,9 @@ import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 //import axios for api request
 import Axios from 'axios'
 
+//import react router
+import { Link } from 'react-router-dom';
+
 
 
 function Post(props){
@@ -44,7 +47,11 @@ function Post(props){
                             
                         />
                         <div className='mt-4'>
-                        <Button variant="primary">Send message to username</Button>
+                        <Link to="/userInformations">
+                            <Button>
+                                Profile
+                            </Button>
+                        </Link>
                         </div>
                     </Card.Body>
                     <Card.Footer className="text-muted">{props.postTime}</Card.Footer>
