@@ -20,6 +20,12 @@ function Post(props){
 
     //username is fetched with useeffect using userId
     const [username, setUsername] = useState('')
+
+    //comments
+    const [comments, setComments] = useState([])
+    
+    //check if comments are fetched
+    const [isLoading, setIsLoading] = useState(1)
     
 
     //get username with userId so that username can be shown in post components
@@ -48,7 +54,7 @@ function Post(props){
             }
         })
         .then((response) => {
-            console.log(response.data)
+            setComments(response.data)
         })
     }
     
@@ -85,19 +91,27 @@ function Post(props){
                         </Card.Footer>
 
                         show comments
-                        <Card>
-                            <Card.Title className='mt-1'>
-                                {username} 
-                            </Card.Title>
 
-                            <Card.Text className='mt-2'>
-                                {props.postContent}
-                            </Card.Text>
+                        {
+                            comments.map(comment => {
+                                return(
+                                    <Card>
+                                        <Card.Title className='mt-1'>
+                                            {comment.userId} 
+                                        </Card.Title>
 
-                            <Card.Footer className="text-muted">
-                                {props.postTime}
-                            </Card.Footer>
-                        </Card>
+                                        <Card.Text className='mt-2'>
+                                            {comment.commentContent}
+                                        </Card.Text>
+
+                                        <Card.Footer className="text-muted">
+                                            {comment.commentTime}
+                                        </Card.Footer>
+                                    </Card>
+                                )
+                            })
+
+                        }
                         
                     </Card>
                 </Col>
