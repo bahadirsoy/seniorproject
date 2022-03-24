@@ -108,6 +108,26 @@ app.get('/api/getUserInformations', (req, res) => {
 
 })
 
+//get post comments
+app.get('/api/getPostComments', (req, res) => {
+
+    //get postId to get comment
+    const postId = req.query.postId
+
+    sql = "SELECT * FROM seniorprojectdbschema.postcomment WHERE postId = ?"
+    db.query(sql, 
+        [postId], 
+        (error, result) => {
+            if(error){
+                console.log(error)
+            } else{
+                res.send(result)
+            }
+        }
+    )
+
+})
+
 //insert new post
 app.post('/api/insertPost', (req, res) => {
     const userId = req.body.userId

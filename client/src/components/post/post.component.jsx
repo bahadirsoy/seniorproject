@@ -24,6 +24,12 @@ function Post(props){
 
     //get username with userId so that username can be shown in post components
     useEffect(() => {
+       getUsernameFromId()
+       fetchComments()
+    }, [])
+
+    //get getUsernameFromId
+    const getUsernameFromId = (() => {
         Axios.get("http://localhost:3001/api/getUsernameFromId", {
             params: {
                 userId: props.userId
@@ -32,7 +38,19 @@ function Post(props){
         .then((response) => {
             setUsername(response.data[0].username)
         })
-    }, [])
+    })
+
+    //fetch comments
+    const fetchComments = () => {
+        Axios.get("http://localhost:3001/api/getPostComments", {
+            params: {
+                postId: props.postId
+            }
+        })
+        .then((response) => {
+            console.log(response.data)
+        })
+    }
     
     return(
         <Container>
