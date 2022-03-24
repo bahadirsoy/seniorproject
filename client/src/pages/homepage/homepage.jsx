@@ -54,6 +54,7 @@ function HomePage(props){
                     return(
                         <Post 
                             key = {info.postId}
+                            postId = {info.postId}
                             postContent = {info.postContent}
                             postTime = {info.postTime}
                             

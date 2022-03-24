@@ -39,24 +39,48 @@ function Post(props){
             <Row>
                 <Col>
                     <Card className="mt-5">
-                    <Card.Body>
-                        <Card.Title> {username} </Card.Title>
-                        <Card.Text className='mt-4'>
-                            {props.postContent}
-                        </Card.Text>
-                        
-                        <Card.Img 
+                        <Card.Body>
                             
-                        />
-                        <div className='mt-4'>
-                        <Link to={`/userInformations/${username}`}>
-                            <Button>
-                                Profile
-                            </Button>
-                        </Link>
-                        </div>
-                    </Card.Body>
-                    <Card.Footer className="text-muted">{props.postTime}</Card.Footer>
+                            <Card.Title>
+                                {username} 
+                            </Card.Title>
+
+                            <Card.Text className='mt-4'>
+                                {props.postContent}
+                            </Card.Text>
+                            
+                            <Card.Img 
+                                
+                            />
+
+                            <div className='mt-4'>
+                            <Link to={`/userInformations/${username}`}>
+                                <Button>
+                                    Profile
+                                </Button>
+                            </Link>
+                            </div>
+                        </Card.Body>
+
+                        <Card.Footer className="text-muted">
+                            {props.postTime}
+                        </Card.Footer>
+
+                        show comments
+                        <Card>
+                            <Card.Title className='mt-1'>
+                                {username} 
+                            </Card.Title>
+
+                            <Card.Text className='mt-2'>
+                                {props.postContent}
+                            </Card.Text>
+
+                            <Card.Footer className="text-muted">
+                                {props.postTime}
+                            </Card.Footer>
+                        </Card>
+                        
                     </Card>
                 </Col>
             </Row>
