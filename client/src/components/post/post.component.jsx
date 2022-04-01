@@ -14,6 +14,9 @@ import Axios from 'axios'
 //import react router
 import { Link } from 'react-router-dom';
 
+//import custom components
+import Comment from '../comment/comment.component';
+
 
 
 function Post(props){
@@ -23,15 +26,19 @@ function Post(props){
 
     //comments
     const [comments, setComments] = useState([])
-    
-    //check if comments are fetched
-    const [isLoading, setIsLoading] = useState(1)
+
+    //comment username
+    const [commentUsername, setCommentUsername] = useState('')
+
+    //check if comments are loaded
+    const [isLoaded, setIsLoaded] = useState(0)
     
 
     //get username with userId so that username can be shown in post components
     useEffect(() => {
        getUsernameFromId()
        fetchComments()
+       setIsLoaded(1)
     }, [])
 
     //get getUsernameFromId
@@ -54,7 +61,18 @@ function Post(props){
             }
         })
         .then((response) => {
-            setComments(response.data)
+            
+            if(response.data.length > 0){
+                setComments(response.data)
+                Axios("http://localhost:3001/api/getUsernameFromId", {
+                    params: {
+                        userId: response.data[0].userId
+                    }
+                }).then((response) => {
+                    setCommentUsername(response.data[0].username)
+                })
+            }
+            
         })
     }
     
@@ -93,23 +111,16 @@ function Post(props){
                         show comments
 
                         {
-                            comments.map(comment => {
+                            isLoaded ? comments.map(comment => {
                                 return(
-                                    <Card>
-                                        <Card.Title className='mt-1'>
-                                            {comment.userId} 
-                                        </Card.Title>
-
-                                        <Card.Text className='mt-2'>
-                                            {comment.commentContent}
-                                        </Card.Text>
-
-                                        <Card.Footer className="text-muted">
-                                            {comment.commentTime}
-                                        </Card.Footer>
-                                    </Card>
+                                    <Comment
+                                        key={comment.commentId}
+                                        commentUsername={commentUsername} 
+                                        commentContent={comment.commentContent}
+                                        commentTime={comment.commentTime}
+                                    />
                                 )
-                            })
+                            }) : "Loading..."
 
                         }
                         
