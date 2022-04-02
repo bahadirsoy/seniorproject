@@ -18,10 +18,27 @@ import { Link } from 'react-router-dom';
 
 function Comment(props){
 
+    useEffect(() => {
+        getCommentUsername()
+     }, [])
+
+    //comment username
+    const [commentUsername, setCommentUsername] = useState('')
+
+    const getCommentUsername = () => {
+        Axios("http://localhost:3001/api/getUsernameFromId", {
+            params: {
+                userId: props.commentUserId
+            }
+        }).then((response) => {
+            setCommentUsername(response.data[0].username)
+        })
+    }
+
     return(
         <Card className="mt-4 ml-5">
             <Card.Title className='mt-1'>
-                {props.commentUsername} 
+                {commentUsername} 
             </Card.Title>
 
             <Card.Text className='mt-2'>

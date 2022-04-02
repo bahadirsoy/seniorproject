@@ -24,6 +24,16 @@ function AddComment(props){
     //state value for comment input
     const [newComment, setNewComment] = useState('')
 
+    //insert new comment
+    const insertPostComment = () => {
+        Axios.post('http://localhost:3001/api/insertPostComment', {
+            newComment: newComment,
+            postId: props.postId,
+            userId: props.userIdCookie
+        }).then((response) => { //feedback from api
+            console.log(response)
+        })
+    }
     
     return(
         <InputGroup className="mb-3">
@@ -33,6 +43,9 @@ function AddComment(props){
                 aria-describedby="basic-addon1"
                 onChange = {(e) => {setNewComment(e.target.value)}}
             />
+            <Button onClick={insertPostComment} variant="outline-secondary" id="basic-addon1">
+                Add
+            </Button>
         </InputGroup>
     )
 }

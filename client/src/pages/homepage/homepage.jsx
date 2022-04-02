@@ -59,6 +59,7 @@ function HomePage(props){
                             postTime = {info.postTime}
                             
                             userId = {info.userId}
+                            userIdCookie = {props.userIdCookie}
                         />)
                 }) :
                 "Loading..."

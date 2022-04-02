@@ -28,9 +28,6 @@ function Post(props){
     //comments
     const [comments, setComments] = useState([])
 
-    //comment username
-    const [commentUsername, setCommentUsername] = useState('')
-
     //check if comments are loaded
     const [isLoaded, setIsLoaded] = useState(0)
     
@@ -65,18 +62,24 @@ function Post(props){
             
             if(response.data.length > 0){
                 setComments(response.data)
-                Axios("http://localhost:3001/api/getUsernameFromId", {
-                    params: {
-                        userId: response.data[0].userId
-                    }
-                }).then((response) => {
-                    setCommentUsername(response.data[0].username)
-                })
             }
             
         })
     }
     
+    //state value for comment input
+    const [newComment, setNewComment] = useState('')
+
+    //insert new comment
+    const insertPostComment = () => {
+        Axios.post('http://localhost:3001/api/insertPostComment', {
+            newComment: newComment,
+            postId: props.postId,
+            userId: props.userIdCookie
+        }).then((response) => { //feedback from api
+            console.log(response)
+        })
+    }
     
     return(
         <Container>
@@ -111,20 +114,29 @@ function Post(props){
                         </Card.Footer>
 
 
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+                            <FormControl
+                                placeholder="Add new comment..."
+                                aria-describedby="basic-addon1"
+                                onChange = {(e) => {setNewComment(e.target.value)}}
+                            />
+                            <Button onClick={insertPostComment} variant="outline-secondary" id="basic-addon1">
+                                Add
+                            </Button>
+                        </InputGroup>
+
                         {
                             isLoaded ? comments.map(comment => {
                                 return(
-                                    <div>
+                                    <div>{console.log(comment)}
                                         <Comment
                                             key={comment.postcommentId}
-                                            commentUsername={commentUsername} 
+                                            commentUserId={comment.userId} 
                                             commentContent={comment.commentContent}
                                             commentTime={comment.commentTime}
                                         />
-
-                                        <AddComment
-                                            postId = {comment.postId}
-                                        />
+                                        
                                     </div>
                                 )
                             }) : "Loading..."
