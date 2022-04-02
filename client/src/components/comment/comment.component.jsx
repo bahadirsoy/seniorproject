@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
 function Comment(props){
 
     return(
-        <Card>
+        <Card className="mt-4 ml-5">
             <Card.Title className='mt-1'>
                 {props.commentUsername} 
             </Card.Title>

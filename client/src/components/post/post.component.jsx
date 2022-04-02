@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import './post.styles.css'
 
 //import reactstrap components
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, InputGroup, FormControl } from 'react-bootstrap';
 
 //import axios for api request
 import Axios from 'axios'
@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 
 //import custom components
 import Comment from '../comment/comment.component';
+import AddComment from '../addComment/addcomment';
 
 
 
@@ -76,6 +77,7 @@ function Post(props){
         })
     }
     
+    
     return(
         <Container>
             <Row>
@@ -108,17 +110,22 @@ function Post(props){
                             {props.postTime}
                         </Card.Footer>
 
-                        show comments
 
                         {
                             isLoaded ? comments.map(comment => {
                                 return(
-                                    <Comment
-                                        key={comment.commentId}
-                                        commentUsername={commentUsername} 
-                                        commentContent={comment.commentContent}
-                                        commentTime={comment.commentTime}
-                                    />
+                                    <div>
+                                        <Comment
+                                            key={comment.postcommentId}
+                                            commentUsername={commentUsername} 
+                                            commentContent={comment.commentContent}
+                                            commentTime={comment.commentTime}
+                                        />
+
+                                        <AddComment
+                                            postId = {comment.postId}
+                                        />
+                                    </div>
                                 )
                             }) : "Loading..."
 
