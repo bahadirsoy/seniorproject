@@ -129,9 +129,8 @@ function Post(props){
                         {
                             isLoaded ? comments.map(comment => {
                                 return(
-                                    <div>{console.log(comment)}
+                                    <div key={comment.postcommentId}>
                                         <Comment
-                                            key={comment.postcommentId}
                                             commentUserId={comment.userId} 
                                             commentContent={comment.commentContent}
                                             commentTime={comment.commentTime}

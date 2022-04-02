@@ -128,6 +128,23 @@ app.get('/api/getPostComments', (req, res) => {
 
 })
 
+//get all user reviews
+app.get('/api/getUserReviews', (req, res) => {
+
+    //reviewed user Id
+    const reviewedId = req.query.reviewedId
+    
+    sql = "SELECT * FROM seniorprojectdbschema.userreview WHERE reviewedId = ?"
+    db.query(sql, [reviewedId], (error, result) => {
+        if(error){
+            console.log(error)
+        } else{
+            res.send(result)
+        }
+    })
+
+})
+
 //insert new post
 app.post('/api/insertPost', (req, res) => {
     const userId = req.body.userId

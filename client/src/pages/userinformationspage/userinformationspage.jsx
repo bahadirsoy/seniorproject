@@ -33,10 +33,11 @@ function UserInformations(props){
     useEffect(() => {
         getUserInformations()
         getUserReviews()
-    }, [])
+    }, [userInformations])
 
     //get all user profile informations and set state
     const getUserInformations = () => {
+        if(userInformations) return
         Axios.get("http://localhost:3001/api/getUserInformations", {
             params: {
                 username: username
@@ -56,9 +57,11 @@ function UserInformations(props){
 
     //get all user reviews
     const getUserReviews = () => {
+        if(!userInformations) return
+        
         Axios.get("http://localhost:3001/api/getUserReviews", {
             params: {
-                userId: userInformations.userId
+                reviewedId: userInformations.userId
             }
         })
         .then((response) => {
