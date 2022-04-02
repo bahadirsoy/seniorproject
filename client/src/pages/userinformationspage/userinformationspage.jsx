@@ -7,6 +7,7 @@ import './userinformations.styles.css'
 
 //import custom components
 import CustomInput from '../../components/custominput/custominput.component';
+import UserReview from '../../components/userreview/userreview.component';
 
 //import react strap components
 import { Container, Row, Col, Button, InputGroup, FormControl } from 'react-bootstrap';
@@ -26,8 +27,8 @@ function UserInformations(props){
     //user informations
     const [userInformations, setUserInformations] = useState()
 
-    //user id
-    const [userId, setUserId] = useState()
+    //user reviews
+    const [userReviews, setUserReviews] = useState()
 
     //specific user information using username which is link parameter
     useEffect(() => {
@@ -58,14 +59,14 @@ function UserInformations(props){
     //get all user reviews
     const getUserReviews = () => {
         if(!userInformations) return
-        
+
         Axios.get("http://localhost:3001/api/getUserReviews", {
             params: {
                 reviewedId: userInformations.userId
             }
         })
         .then((response) => {
-            console.log(response)
+            setUserReviews(response.data)
         })
     }
 
@@ -123,11 +124,20 @@ function UserInformations(props){
                     <Col xs={10}>
                         <h3>User reviews</h3>
 
-
+                        {userReviews ? userReviews.map((review) => {
+                            return(
+                                <UserReview
+                                    key = {review.userreviewId}
+                                    reviewerId = {review.reviewerId}
+                                    reviewContent = {review.reviewContent}
+                                    reviewTime = {review.reviewTime}
+                                />
+                            )
+                        }) : null}
                     </Col>
 
                     <Col xs={2}>
-                        a
+                        
                     </Col>
                 </Row>
             </Container>
