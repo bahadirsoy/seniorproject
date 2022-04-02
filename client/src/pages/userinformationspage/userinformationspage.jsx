@@ -26,8 +26,17 @@ function UserInformations(props){
     //user informations
     const [userInformations, setUserInformations] = useState()
 
+    //user id
+    const [userId, setUserId] = useState()
+
     //specific user information using username which is link parameter
     useEffect(() => {
+        getUserInformations()
+        getUserReviews()
+    }, [])
+
+    //get all user profile informations and set state
+    const getUserInformations = () => {
         Axios.get("http://localhost:3001/api/getUserInformations", {
             params: {
                 username: username
@@ -35,6 +44,7 @@ function UserInformations(props){
         })
         .then((response) => {
             setUserInformations({
+                userId: response.data[0].userId,
                 username: response.data[0].username,
                 name: response.data[0].name,
                 surname: response.data[0].surname,
@@ -42,7 +52,19 @@ function UserInformations(props){
                 phone: response.data[0].phone,
             })
         })
-    }, [])
+    }
+
+    //get all user reviews
+    const getUserReviews = () => {
+        Axios.get("http://localhost:3001/api/getUserReviews", {
+            params: {
+                userId: userInformations.userId
+            }
+        })
+        .then((response) => {
+            console.log(response)
+        })
+    }
 
     return(
         <div className='mt-5'>
@@ -89,6 +111,20 @@ function UserInformations(props){
 
                     <Col>
                         
+                    </Col>
+                </Row>
+            </Container>
+
+            <Container className='mt-5'>
+                <Row>
+                    <Col xs={10}>
+                        <h3>User reviews</h3>
+
+
+                    </Col>
+
+                    <Col xs={2}>
+                        a
                     </Col>
                 </Row>
             </Container>

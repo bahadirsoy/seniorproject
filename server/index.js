@@ -203,6 +203,30 @@ app.post('/api/login', (req,res) => {
 
 })
 
+//INSERT NEW POST COMMENT
+app.post('/api/insertPostcomment', (req, res) => {
+
+    const postId = req.body.postId
+    const userId = req.body.userId
+    const newComment = req.body.newComment
+    
+    sql = "INSERT INTO seniorprojectdbschema.postcomment (postId, userId, commentContent) VALUES (?, ?, ?)"
+    db.query(
+        sql, 
+        [postId, userId, newComment], 
+        (error, result) => {
+            if(error){
+                console.log(error)
+                res.send(error)
+            } else{
+                console.log(result)
+                res.send(result)
+            }
+        }
+    )
+
+})
+
 //UPDATE USER REQUEST
 app.put("/api/updateUser", (req, res) => {
     const name = req.body.name
