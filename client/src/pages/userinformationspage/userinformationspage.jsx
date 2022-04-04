@@ -30,6 +30,9 @@ function UserInformations(props){
     //user reviews
     const [userReviews, setUserReviews] = useState()
 
+    //new review
+    const [newReview, setNewReview] = useState()
+
     //specific user information using username which is link parameter
     useEffect(() => {
         getUserInformations()
@@ -68,6 +71,11 @@ function UserInformations(props){
         .then((response) => {
             setUserReviews(response.data)
         })
+    }
+
+    //add new review with axios
+    const addNewReview = () => {
+        console.log("added")
     }
 
     return(
@@ -128,10 +136,11 @@ function UserInformations(props){
                         <InputGroup className="my-5">
                             <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
                             <FormControl
-                                placeholder="Add new comment..."
+                                placeholder="Add new review..."
                                 aria-describedby="basic-addon1"
+                                onChange={(e) => setNewReview(e.target.value)}
                             />
-                            <Button variant="outline-secondary" id="basic-addon1">
+                            <Button onClick={addNewReview} variant="outline-secondary" id="basic-addon1">
                                 Add
                             </Button>
                         </InputGroup>
