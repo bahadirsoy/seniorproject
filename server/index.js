@@ -244,6 +244,26 @@ app.post('/api/insertPostcomment', (req, res) => {
 
 })
 
+app.post('/api/insertReview', (req, res) => {
+    const reviewedId = req.body.reviewedId
+    const reviewerId = req.body.reviewerId
+    const reviewContent = req.body.reviewContent
+
+    sql = "INSERT INTO seniorprojectdbschema.userreview (reviewedId, reviewerId, reviewContent) VALUES (?, ?, ?)"
+    db.query(sql, 
+        [reviewedId, reviewerId, reviewContent], 
+        (error, result) => {
+            if(error){
+                console.log(error)
+                res.send(error)
+            } else{
+                console.log(result)
+                res.send(result)
+            }
+        }
+    )
+})
+
 //UPDATE USER REQUEST
 app.put("/api/updateUser", (req, res) => {
     const name = req.body.name
