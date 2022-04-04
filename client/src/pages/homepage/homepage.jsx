@@ -9,6 +9,12 @@ import './homepage.styles.css'
 import SharePostPanel from '../../components/sharepostpanel/sharepostpanel.component';
 import Post from '../../components/post/post.component';
 
+//import react bootstrap components
+import { Container, Row, Col } from 'react-bootstrap';
+
+//import images
+import logo from '../../images/akdenizLogo.jpg'
+
 //import axios for api request
 import Axios from 'axios'
 
@@ -39,9 +45,10 @@ function HomePage(props){
     }
 
     return(
-        <div>
-            Homepage {props.userIdCookie}
-            
+        
+        props.userIdCookie ? 
+
+        <>
             <SharePostPanel
                 userIdCookie = {props.userIdCookie}
             />
@@ -49,8 +56,6 @@ function HomePage(props){
             {
                 isLoading ?
                 posts.map((info) => {
-                    //console.log(info.postImg ? info.postImg.data : null)
-                    
                     return(
                         <Post 
                             key = {info.postId}
@@ -65,7 +70,23 @@ function HomePage(props){
                 "Loading..."
             }
 
-        </div>
+        </> :
+
+        <Container>
+            <Row>
+                <Col xs={6}>
+                    <img className='akdenizLogo' src={logo} />
+                </Col>
+
+                <Col className='mt-5' xs={6}>
+                    <h1 className='text-center'>Welcome</h1>
+
+                    <div className='welcome-line mt-4'>
+                        FB is social media like program that helps you to find roommate. You must sign in to continue
+                    </div>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 

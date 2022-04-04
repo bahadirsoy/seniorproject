@@ -82,6 +82,7 @@ function Post(props){
     }
     
     return(
+
         <Container>
             <Row>
                 <Col>
@@ -146,7 +147,7 @@ function Post(props){
                         
                 </Col>
             </Row>
-        </Container>
+        </Container> 
     )
 }
 
