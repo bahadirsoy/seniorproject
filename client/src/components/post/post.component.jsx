@@ -112,19 +112,21 @@ function Post(props){
                         <Card.Footer className="text-muted">
                             {props.postTime}
                         </Card.Footer>
+                    </Card>
 
 
-                        <InputGroup className="mb-3">
-                            <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-                            <FormControl
-                                placeholder="Add new comment..."
-                                aria-describedby="basic-addon1"
-                                onChange = {(e) => {setNewComment(e.target.value)}}
-                            />
-                            <Button onClick={insertPostComment} variant="outline-secondary" id="basic-addon1">
-                                Add
-                            </Button>
-                        </InputGroup>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+                        <FormControl
+                            placeholder="Add new comment..."
+                            aria-describedby="basic-addon1"
+                            onChange = {(e) => {setNewComment(e.target.value)}}
+                        />
+                        <Button onClick={insertPostComment} variant="outline-secondary" id="basic-addon1">
+                            Add
+                        </Button>
+                    </InputGroup>
+                        
 
                         {
                             isLoaded ? comments.map(comment => {
@@ -142,7 +144,6 @@ function Post(props){
 
                         }
                         
-                    </Card>
                 </Col>
             </Row>
         </Container>

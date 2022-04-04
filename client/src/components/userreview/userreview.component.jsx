@@ -14,6 +14,9 @@ import { Container, Row, Col, Button, InputGroup, FormControl, Card } from 'reac
 //import axios
 import Axios from 'axios'
 
+//import react router
+import { Link } from 'react-router-dom';
+
 
 function UserReview(props){
 
@@ -43,7 +46,6 @@ function UserReview(props){
                     {props.reviewContent}
                 </Card.Text>
 
-                <Button variant="primary">Profile</Button>
             </Card.Body>
 
             <Card.Footer className="text-muted">

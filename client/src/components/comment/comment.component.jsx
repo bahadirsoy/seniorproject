@@ -36,7 +36,7 @@ function Comment(props){
     }
 
     return(
-        <Card className="mt-4 ml-5">
+        <Card className="mt-2 ml-5">
             <Card.Title className='mt-1'>
                 {commentUsername} 
             </Card.Title>

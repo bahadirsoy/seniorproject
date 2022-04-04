@@ -34,7 +34,7 @@ function UserInformations(props){
     useEffect(() => {
         getUserInformations()
         getUserReviews()
-    }, [userInformations])
+    }, [userInformations, username])
 
     //get all user profile informations and set state
     const getUserInformations = () => {
@@ -78,7 +78,8 @@ function UserInformations(props){
                     <h1 className='mb-5'>User Informations</h1>
                     
                     <Col>
-                        
+                        {props.userIdCookie}
+                        {userInformations ? userInformations.userId : null}
                     </Col>
 
                     <Col xs={10}>
@@ -124,6 +125,17 @@ function UserInformations(props){
                     <Col xs={10}>
                         <h3>User reviews</h3>
 
+                        <InputGroup className="my-5">
+                            <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+                            <FormControl
+                                placeholder="Add new comment..."
+                                aria-describedby="basic-addon1"
+                            />
+                            <Button variant="outline-secondary" id="basic-addon1">
+                                Add
+                            </Button>
+                        </InputGroup>
+
                         {userReviews ? userReviews.map((review) => {
                             return(
                                 <UserReview
@@ -134,6 +146,7 @@ function UserInformations(props){
                                 />
                             )
                         }) : null}
+
                     </Col>
 
                     <Col xs={2}>
