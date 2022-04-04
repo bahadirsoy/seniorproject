@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import './sharepostpanel.styles.css'
 
 //import reactstrap component
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Alert } from 'react-bootstrap';
 
 //import fontawesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -21,9 +21,16 @@ function SharePostPanel(props){
     //hold post variables
     const [postContent, setPostContent] = useState('')
 
+    //post content states
+    const [state, setState] = useState()
 
     //upload post to db
     const insertPost = () => {
+        if(postContent == "" || !postContent){
+            setState("emptyPostContent")
+            return
+        }
+
         Axios.post('http://localhost:3001/api/insertPost', {
             userId: props.userIdCookie,
             postContent: postContent
@@ -36,6 +43,24 @@ function SharePostPanel(props){
     return(
         <Container>
             <Row>
+            
+                {
+                
+                state == "emptyPostContent" ? 
+
+                <Alert variant="danger mt-5">
+                    
+                <Alert.Heading>
+                    Field is empty
+                </Alert.Heading>
+
+                    <p>
+                        Type something to post
+                    </p>
+                </Alert> : null
+                
+                }
+
                 <div className="panel-content panel-activity">
                     <div className="panel-activity__status">
                         <textarea 
@@ -62,6 +87,7 @@ function SharePostPanel(props){
                         </div>
                     </div>
                 </div>
+
             </Row>
         </Container>
     )
