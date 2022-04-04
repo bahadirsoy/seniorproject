@@ -36,6 +36,7 @@ function SharePostPanel(props){
             postContent: postContent
         }).then((response) => { //feedback from api
             console.log(response)
+            window.location.reload()
         })
     }
 
