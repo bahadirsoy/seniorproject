@@ -75,12 +75,17 @@ function UserInformations(props){
 
     //add new review with axios
     const addNewReview = () => {
+        if(newReview == "" || !newReview){
+            return
+        }
+
         Axios.post('http://localhost:3001/api/insertReview', {
             reviewedId: userInformations.userId,
             reviewerId: props.userIdCookie,
             reviewContent: newReview
         }).then((response) => { //feedback from api
             console.log(response)
+            //window.location.reload()
         })
     }
 
@@ -92,8 +97,6 @@ function UserInformations(props){
                     <h1 className='mb-5'>User Informations</h1>
                     
                     <Col>
-                        {props.userIdCookie}
-                        {userInformations ? userInformations.userId : null}
                     </Col>
 
                     <Col xs={10}>
@@ -132,7 +135,7 @@ function UserInformations(props){
                         
                     </Col>
                 </Row>
-            </Container>{userInformations ? userInformations.userId : null} {props.userIdCookie} {newReview}
+            </Container>
 
             <Container className='mt-5'>
                 <Row>

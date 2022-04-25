@@ -72,6 +72,10 @@ function Post(props){
 
     //insert new comment
     const insertPostComment = () => {
+        if(newComment == "" || !newComment){
+            return
+        }
+
         Axios.post('http://localhost:3001/api/insertPostComment', {
             newComment: newComment,
             postId: props.postId,

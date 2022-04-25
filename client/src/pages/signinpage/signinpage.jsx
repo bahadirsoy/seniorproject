@@ -20,6 +20,9 @@ import { useNavigate } from 'react-router-dom';
 //import session and cookies
 import { useCookies } from 'react-cookie';
 
+//import react router
+import { Link } from 'react-router-dom';
+
 
 function SignInPage(props){
 
@@ -103,6 +106,10 @@ function SignInPage(props){
                         />
 
                         <Button onClick={login} variant="primary">Sign in</Button>
+
+                        <Link to='/signinadminpage' className="active">
+                            <Button className='mx-4' variant="warning">Sign in as Admin</Button>
+                        </Link>
                     </Col>
 
                     <Col>

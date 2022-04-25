@@ -23,8 +23,10 @@ function Header(props){
 
     //logout function
     const logout = () => {
+        console.log(props.usernameCookie)
         props.removeUsernameCookie("username")
         props.removeUsernameCookie("userId")
+        console.log(props.usernameCookie)
         navigate('/')
     }
 
@@ -56,9 +58,9 @@ function Header(props){
                                 Activities
                             </Link>
 
-                            <Link to="/" onClick={logout}>
+                            <a onClick={logout}>
                                 Log out
-                            </Link>
+                            </a>
                         </span> :
 
                         <span>

@@ -9,6 +9,7 @@ import SignInPage from './pages/signinpage/signinpage';
 import SignUpPage from './pages/signuppage/signuppage';
 import ProfilePage from './pages/profilepage/profilepage';
 import UserInformations from './pages/userinformationspage/userinformationspage';
+import SignInAdminPage from './pages/signinadminpage/signinadminpage';
 
 //import react router components
 import {
@@ -72,6 +73,12 @@ function App() {
             usernameCookie = {usernameCookie.username}
             userIdCookie = {userIdCookie.userId}
           />}
+        />
+        <Route path='/signinadminpage' element={
+          <SignInAdminPage 
+            
+          />
+        }
         />
       </Routes>
 
