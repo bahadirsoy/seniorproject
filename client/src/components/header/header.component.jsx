@@ -13,10 +13,13 @@ import Session from 'react-session-api'
 import { Cookies, useCookies } from 'react-cookie';
 
 //import navigate
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
 function Header(props){
+
+    //get location
+    const location = useLocation();
 
     //navigate
     const navigate = useNavigate()
@@ -32,7 +35,57 @@ function Header(props){
 
     return(
         <div>
-            <div className="header">
+            {
+                location.pathname == "/adminHomePage" ? 
+
+                <div className="header">
+                    <a className="logo">CompanyLogo</a>
+                    {
+                        props.usernameCookie ?
+                        <a className='float-left'> Welcome {props.usernameCookie} </a> :
+                        null
+                    }
+                    
+                    <div className="header-right">
+
+                        <Link to='/' >
+                            Home
+                        </Link>
+                        
+                        {
+                            props.usernameCookie ?
+
+                            <span>
+                                <Link to="/adminProfile">
+                                    Profile
+                                </Link>
+
+                                <Link to="/adminProfile">
+                                    Activity
+                                </Link>
+
+                                <a onClick={logout}>
+                                    Log out
+                                </a>
+                            </span> :
+
+                            <span>
+                                <Link to="/signin">
+                                    Sign in
+                                </Link>
+
+                                <Link to="/signup">
+                                    Sign up
+                                </Link>
+                            </span>
+                        }
+                        
+                    </div>
+                </div>
+                
+                :
+
+                <div className="header">
                 <a className="logo">CompanyLogo</a>
                 {
                     props.usernameCookie ?
@@ -45,7 +98,7 @@ function Header(props){
                     <Link to='/' className="active">
                         Home
                     </Link>
-
+                    
                     {
                         props.usernameCookie ?
 
@@ -76,6 +129,7 @@ function Header(props){
                     
                 </div>
             </div>
+            }
         </div>
     )
 }

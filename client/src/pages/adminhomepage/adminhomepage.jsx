@@ -28,7 +28,7 @@ function AdminHomePage(props){
 
     return(
         <div className='mt-5'>
-            admin home page
+            
         </div>
     )
 }
