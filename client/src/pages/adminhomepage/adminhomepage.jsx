@@ -54,6 +54,7 @@ function AdminHomePage(props){
                                     <th scope="col">Email</th>
                                     <th scope="col">Phone</th>
                                     <th scope="col">Sign up date</th>
+                                    <th scope="col">Sign up date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,6 +69,13 @@ function AdminHomePage(props){
                                                 <td>{user.email}</td>
                                                 <td>{user.phone}</td>
                                                 <td>{user.signupdate}</td>
+                                                <td>
+                                                <Link to={`/adminUserInformations/${user.userId}`}>
+                                                    <Button>
+                                                        Profile
+                                                    </Button>
+                                                </Link>
+                                                </td>
                                             </tr>
                                         )
                                     }) :
