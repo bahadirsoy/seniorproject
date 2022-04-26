@@ -68,6 +68,21 @@ app.get('/api/getUsernameFromId', (req, res) => {
 
 })
 
+//get all users for admin page
+app.get('/api/getAllUsersForAdmin', (req, res) => {
+    
+    sql = "SELECT * FROM seniorprojectdbschema.user"
+    db.query(
+        sql, 
+        (error, result) => {
+            if(error){
+                console.log(error)
+            } else{
+                res.send(result)
+            }
+    })
+
+})
 
 //get all posts from db and send it to homepage
 app.get('/api/getPosts', (req, res) => {
@@ -244,6 +259,7 @@ app.post('/api/loginAsAdmin', (req,res) => {
             }
     })
 })
+
 
 //INSERT NEW POST COMMENT
 app.post('/api/insertPostcomment', (req, res) => {

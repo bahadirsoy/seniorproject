@@ -26,17 +26,15 @@ function Header(props){
 
     //logout function
     const logout = () => {
-        console.log(props.usernameCookie)
         props.removeUsernameCookie("username")
         props.removeUsernameCookie("userId")
-        console.log(props.usernameCookie)
         navigate('/')
     }
 
     return(
         <div>
             {
-                location.pathname == "/adminHomePage" ? 
+                location.pathname.includes("admin") ? 
 
                 <div className="header">
                     <a className="logo">CompanyLogo</a>
@@ -48,7 +46,7 @@ function Header(props){
                     
                     <div className="header-right">
 
-                        <Link to='/' >
+                        <Link to='/adminHomePage' >
                             Home
                         </Link>
                         
@@ -56,9 +54,6 @@ function Header(props){
                             props.usernameCookie ?
 
                             <span>
-                                <Link to="/adminProfile">
-                                    Profile
-                                </Link>
 
                                 <Link to="/adminProfile">
                                     Activity
