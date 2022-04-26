@@ -216,8 +216,33 @@ app.post('/api/login', (req,res) => {
                 })
             }
     })
+})
 
+//SIGN IN AS ADMIN
+app.post('/api/loginAsAdmin', (req,res) => {
 
+    const username = req.body.username
+    const password = req.body.password
+
+    const sql = "SELECT * FROM seniorprojectdbschema.admin WHERE username = ?"
+    db.query(
+        sql,
+        [username],
+        (error, result) => {
+            //if sql error
+            if(error){
+                res.send({error: error})
+            } else if(result.length > 0 && passwordHash.verify(password, result[0].password)){ //succesful login
+                res.send({
+                    result: result,
+                    isLoginSuccessful: true
+                })
+            } else{ //unsuccesful login
+                res.send({
+                    isLoginSuccessful: false
+                })
+            }
+    })
 })
 
 //INSERT NEW POST COMMENT

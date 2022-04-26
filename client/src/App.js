@@ -10,6 +10,7 @@ import SignUpPage from './pages/signuppage/signuppage';
 import ProfilePage from './pages/profilepage/profilepage';
 import UserInformations from './pages/userinformationspage/userinformationspage';
 import SignInAdminPage from './pages/signinadminpage/signinadminpage';
+import AdminHomePage from './pages/adminhomepage/adminhomepage';
 
 //import react router components
 import {
@@ -76,7 +77,13 @@ function App() {
         />
         <Route path='/signinadminpage' element={
           <SignInAdminPage 
-            
+            setUsernameCookie = {setUsernameCookie}
+          />
+        }
+        />
+        <Route path='/adminHomePage' element={
+          <AdminHomePage 
+            setUsernameCookie = {setUsernameCookie}
           />
         }
         />
