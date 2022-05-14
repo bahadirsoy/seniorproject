@@ -109,9 +109,9 @@ function SignUpPage(props){
     }
 
     return(
+        props.usernameCookie ? window.location.href = "/" :
+
         <div className='mt-5'>
-
-
             <Container>
                 <Row>
                     
