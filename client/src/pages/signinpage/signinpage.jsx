@@ -57,8 +57,10 @@ function SignInPage(props){
     }
 
     return(
-        <div className='mt-5'>
 
+        !props.usernameCookie ? 
+
+        <div className='mt-5'>
 
             <Container>
                 <Row>
@@ -119,7 +121,10 @@ function SignInPage(props){
             </Container>
 
             
-        </div>
+        </div> :
+
+        window.location.href = "/"
+
     )
 }
 

@@ -9,10 +9,10 @@ const mysql = require('mysql')
 const passwordHash = require('password-hash');
 
 const db = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: "root",
-    database: "seniorprojectdbschema"
+    host: "89.252.182.132",
+    user: "mbtitrco_soyisi",
+    password: "BahadirFurkan",
+    database: "mbtitrco_SENIORDB"
 })
 
 
@@ -30,7 +30,7 @@ app.get('/api/getId', (req, res) => {
     //username
     const username = req.query.username
 
-    sql = "SELECT userId FROM seniorprojectdbschema.user WHERE username = ?"
+    sql = "SELECT userId FROM mbtitrco_SENIORDB.user WHERE username = ?"
     db.query(
         sql, 
         [username], 
@@ -53,7 +53,7 @@ app.get('/api/getUsernameFromId', (req, res) => {
     //username
     const userId = req.query.userId
     
-    sql = "SELECT username FROM seniorprojectdbschema.user WHERE userId = ?"
+    sql = "SELECT username FROM mbtitrco_SENIORDB.user WHERE userId = ?"
     db.query(
         sql, 
         [userId], 
@@ -71,7 +71,7 @@ app.get('/api/getUsernameFromId', (req, res) => {
 //get all users for admin page
 app.get('/api/getAllUsersForAdmin', (req, res) => {
     
-    sql = "SELECT * FROM seniorprojectdbschema.user"
+    sql = "SELECT * FROM mbtitrco_SENIORDB.user"
     db.query(
         sql, 
         (error, result) => {
@@ -88,7 +88,7 @@ app.get('/api/getAllUsersForAdmin', (req, res) => {
 app.get('/api/getPosts', (req, res) => {
 
 
-    sql = "SELECT * FROM seniorprojectdbschema.post"
+    sql = "SELECT * FROM mbtitrco_SENIORDB.post"
     db.query(
         sql, 
         (error, result) => {
@@ -109,7 +109,7 @@ app.get('/api/getUserInformations', (req, res) => {
     //username
     const username = req.query.username
     
-    sql = "SELECT * FROM seniorprojectdbschema.user WHERE username = ?"
+    sql = "SELECT * FROM mbtitrco_SENIORDB.user WHERE username = ?"
     db.query(
         sql, 
         [username], 
@@ -129,7 +129,7 @@ app.get('/api/getPostComments', (req, res) => {
     //get postId to get comment
     const postId = req.query.postId
 
-    sql = "SELECT * FROM seniorprojectdbschema.postcomment WHERE postId = ?"
+    sql = "SELECT * FROM mbtitrco_SENIORDB.postcomment WHERE postId = ?"
     db.query(sql, 
         [postId], 
         (error, result) => {
@@ -149,7 +149,7 @@ app.get('/api/getUserReviews', (req, res) => {
     //reviewed user Id
     const reviewedId = req.query.reviewedId
     
-    sql = "SELECT * FROM seniorprojectdbschema.userreview WHERE reviewedId = ?"
+    sql = "SELECT * FROM mbtitrco_SENIORDB.userreview WHERE reviewedId = ?"
     db.query(sql, [reviewedId], (error, result) => {
         if(error){
             console.log(error)
@@ -165,7 +165,7 @@ app.post('/api/insertPost', (req, res) => {
     const userId = req.body.userId
     const postContent = req.body.postContent
 
-    sql = "INSERT INTO seniorprojectdbschema.post (userId, postContent) VALUES (?, ?)"
+    sql = "INSERT INTO mbtitrco_SENIORDB.post (userId, postContent) VALUES (?, ?)"
     db.query(sql, 
         [userId, postContent], 
         (error, result) => {
@@ -212,7 +212,7 @@ app.post('/api/login', (req,res) => {
     const username = req.body.username
     const password = req.body.password
 
-    const sql = "SELECT * FROM seniorprojectdbschema.user WHERE username = ?"
+    const sql = "SELECT * FROM mbtitrco_SENIORDB.user WHERE username = ?"
     db.query(
         sql,
         [username],
@@ -239,7 +239,7 @@ app.post('/api/loginAsAdmin', (req,res) => {
     const username = req.body.username
     const password = req.body.password
 
-    const sql = "SELECT * FROM seniorprojectdbschema.admin WHERE username = ?"
+    const sql = "SELECT * FROM mbtitrco_SENIORDB.admin WHERE username = ?"
     db.query(
         sql,
         [username],
@@ -268,7 +268,7 @@ app.post('/api/insertPostcomment', (req, res) => {
     const userId = req.body.userId
     const newComment = req.body.newComment
     
-    sql = "INSERT INTO seniorprojectdbschema.postcomment (postId, userId, commentContent) VALUES (?, ?, ?)"
+    sql = "INSERT INTO mbtitrco_SENIORDB.postcomment (postId, userId, commentContent) VALUES (?, ?, ?)"
     db.query(
         sql, 
         [postId, userId, newComment], 
@@ -290,7 +290,7 @@ app.post('/api/insertReview', (req, res) => {
     const reviewerId = req.body.reviewerId
     const reviewContent = req.body.reviewContent
 
-    sql = "INSERT INTO seniorprojectdbschema.userreview (reviewedId, reviewerId, reviewContent) VALUES (?, ?, ?)"
+    sql = "INSERT INTO mbtitrco_SENIORDB.userreview (reviewedId, reviewerId, reviewContent) VALUES (?, ?, ?)"
     db.query(sql, 
         [reviewedId, reviewerId, reviewContent], 
         (error, result) => {
