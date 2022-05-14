@@ -88,7 +88,7 @@ function App() {
           />
         }
         />
-        <Route path='/adminUserInformations/:userId' element={
+        <Route path='/adminUserInformations/:username' element={
           <AdminUserInformations 
             
           />

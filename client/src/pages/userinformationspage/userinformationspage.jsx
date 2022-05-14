@@ -21,7 +21,7 @@ import { useParams } from 'react-router-dom';
 
 function UserInformations(props){
     
-    //username parameter for userinformations page. It will be used for fetchined specific user information
+    //username parameter for userinformations page. It will be used for fetch specific user information
     const { username } = useParams();
 
     //user informations
@@ -85,7 +85,7 @@ function UserInformations(props){
             reviewContent: newReview
         }).then((response) => { //feedback from api
             console.log(response)
-            //window.location.reload()
+            window.location.reload()
         })
     }
 

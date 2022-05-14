@@ -84,7 +84,7 @@ function Header(props){
                 <a className="logo">CompanyLogo</a>
                 {
                     props.usernameCookie ?
-                    <a className='float-left'> {props.userIdCookie} Welcome {props.usernameCookie} </a> :
+                    <a className='float-left'> Welcome {props.usernameCookie} </a> :
                     null
                 }
                 

@@ -20,14 +20,83 @@ import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 //import react router
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+
 
 
 function AdminUserInformations(props){
 
+    //username parameter for userinformations page. It will be used for fetch specific user information
+    const { username } = useParams();
+
+    //user informations
+    const [userInformations, setUserInformations] = useState()
+
+    useEffect(() => {
+        Axios.get("http://localhost:3001/api/getUserInformations", {
+            params: {
+                username: username
+            }
+        })
+        .then((response) => {
+            setUserInformations({
+                userId: response.data[0].userId,
+                username: response.data[0].username,
+                name: response.data[0].name,
+                surname: response.data[0].surname,
+                email: response.data[0].email,
+                phone: response.data[0].phone,
+            })
+        })
+    }, [])
+
     return(
         <div className='mt-5'>
-            sayfa
+            <Container>
+                <Row>
+                    
+                    <h1 className='mb-5'>User Informations</h1>
+                    
+                    <Col>
+                    </Col>
+
+                    <Col xs={10}>
+                        <CustomInput
+                            inputName = "Username: "
+                            placeholder = {userInformations ? userInformations.username : null}
+                            readonly = {1}
+                        />
+
+                        <CustomInput
+                            inputName = "Name: "
+                            placeholder = {userInformations ? userInformations.name : null}
+                            readonly = {1}
+                        />
+
+                        <CustomInput
+                            inputName = "Surname: "
+                            placeholder = {userInformations ? userInformations.surname : null}
+                            readonly = {1}
+                        />
+                        
+                        <CustomInput
+                            inputName = "E-mail: "
+                            placeholder = {userInformations ? userInformations.email : null}
+                            readonly = {1}
+                        />
+
+                        <CustomInput
+                            inputName = "Phone: "
+                            placeholder = {userInformations ? userInformations.phone : null}
+                            readonly = {1}
+                        />
+                    </Col>
+
+                    <Col>
+                        
+                    </Col>
+                </Row>
+            </Container>
         </div>
     )
 }

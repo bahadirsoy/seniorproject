@@ -70,7 +70,7 @@ function AdminHomePage(props){
                                                 <td>{user.phone}</td>
                                                 <td>{user.signupdate}</td>
                                                 <td>
-                                                <Link to={`/adminUserInformations/${user.userId}`}>
+                                                <Link to={`/adminUserInformations/${user.username}`}>
                                                     <Button>
                                                         Profile
                                                     </Button>
