@@ -4,15 +4,16 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const app = express()
 const mysql = require('mysql')
+const path = require("path")
 
 //import password hash
 const passwordHash = require('password-hash');
 
 const db = mysql.createPool({
-    host: "89.252.182.132",
-    user: "mbtitrco_soyisi",
-    password: "BahadirFurkan",
-    database: "mbtitrco_SENIORDB"
+    host: "us-cdbr-east-05.cleardb.net",
+    user: "b3e17cdd5aee61",
+    password: "24913314",
+    database: "heroku_d3e9c6ceba36c62"
 })
 
 
@@ -30,7 +31,7 @@ app.get('/api/getId', (req, res) => {
     //username
     const username = req.query.username
 
-    sql = "SELECT userId FROM mbtitrco_SENIORDB.user WHERE username = ?"
+    sql = "SELECT userId FROM heroku_d3e9c6ceba36c62.user WHERE username = ?"
     db.query(
         sql, 
         [username], 
@@ -53,7 +54,7 @@ app.get('/api/getUsernameFromId', (req, res) => {
     //username
     const userId = req.query.userId
     
-    sql = "SELECT username FROM mbtitrco_SENIORDB.user WHERE userId = ?"
+    sql = "SELECT username FROM heroku_d3e9c6ceba36c62.user WHERE userId = ?"
     db.query(
         sql, 
         [userId], 
@@ -71,7 +72,7 @@ app.get('/api/getUsernameFromId', (req, res) => {
 //get all users for admin page
 app.get('/api/getAllUsersForAdmin', (req, res) => {
     
-    sql = "SELECT * FROM mbtitrco_SENIORDB.user"
+    sql = "SELECT * FROM heroku_d3e9c6ceba36c62.user"
     db.query(
         sql, 
         (error, result) => {
@@ -88,7 +89,7 @@ app.get('/api/getAllUsersForAdmin', (req, res) => {
 app.get('/api/getPosts', (req, res) => {
 
 
-    sql = "SELECT * FROM mbtitrco_SENIORDB.post"
+    sql = "SELECT * FROM heroku_d3e9c6ceba36c62.post"
     db.query(
         sql, 
         (error, result) => {
@@ -109,7 +110,7 @@ app.get('/api/getUserInformations', (req, res) => {
     //username
     const username = req.query.username
     
-    sql = "SELECT * FROM mbtitrco_SENIORDB.user WHERE username = ?"
+    sql = "SELECT * FROM heroku_d3e9c6ceba36c62.user WHERE username = ?"
     db.query(
         sql, 
         [username], 
@@ -129,7 +130,7 @@ app.get('/api/getPostComments', (req, res) => {
     //get postId to get comment
     const postId = req.query.postId
 
-    sql = "SELECT * FROM mbtitrco_SENIORDB.postcomment WHERE postId = ?"
+    sql = "SELECT * FROM heroku_d3e9c6ceba36c62.postcomment WHERE postId = ?"
     db.query(sql, 
         [postId], 
         (error, result) => {
@@ -149,7 +150,7 @@ app.get('/api/getUserReviews', (req, res) => {
     //reviewed user Id
     const reviewedId = req.query.reviewedId
     
-    sql = "SELECT * FROM mbtitrco_SENIORDB.userreview WHERE reviewedId = ?"
+    sql = "SELECT * FROM heroku_d3e9c6ceba36c62.userreview WHERE reviewedId = ?"
     db.query(sql, [reviewedId], (error, result) => {
         if(error){
             console.log(error)
@@ -165,7 +166,7 @@ app.post('/api/insertPost', (req, res) => {
     const userId = req.body.userId
     const postContent = req.body.postContent
 
-    sql = "INSERT INTO mbtitrco_SENIORDB.post (userId, postContent) VALUES (?, ?)"
+    sql = "INSERT INTO heroku_d3e9c6ceba36c62.post (userId, postContent) VALUES (?, ?)"
     db.query(sql, 
         [userId, postContent], 
         (error, result) => {
@@ -212,7 +213,7 @@ app.post('/api/login', (req,res) => {
     const username = req.body.username
     const password = req.body.password
 
-    const sql = "SELECT * FROM mbtitrco_SENIORDB.user WHERE username = ?"
+    const sql = "SELECT * FROM heroku_d3e9c6ceba36c62.user WHERE username = ?"
     db.query(
         sql,
         [username],
@@ -239,7 +240,7 @@ app.post('/api/loginAsAdmin', (req,res) => {
     const username = req.body.username
     const password = req.body.password
 
-    const sql = "SELECT * FROM mbtitrco_SENIORDB.admin WHERE username = ?"
+    const sql = "SELECT * FROM heroku_d3e9c6ceba36c62.admin WHERE username = ?"
     db.query(
         sql,
         [username],
@@ -268,7 +269,7 @@ app.post('/api/insertPostcomment', (req, res) => {
     const userId = req.body.userId
     const newComment = req.body.newComment
     
-    sql = "INSERT INTO mbtitrco_SENIORDB.postcomment (postId, userId, commentContent) VALUES (?, ?, ?)"
+    sql = "INSERT INTO heroku_d3e9c6ceba36c62.postcomment (postId, userId, commentContent) VALUES (?, ?, ?)"
     db.query(
         sql, 
         [postId, userId, newComment], 
@@ -290,7 +291,7 @@ app.post('/api/insertReview', (req, res) => {
     const reviewerId = req.body.reviewerId
     const reviewContent = req.body.reviewContent
 
-    sql = "INSERT INTO mbtitrco_SENIORDB.userreview (reviewedId, reviewerId, reviewContent) VALUES (?, ?, ?)"
+    sql = "INSERT INTO heroku_d3e9c6ceba36c62.userreview (reviewedId, reviewerId, reviewContent) VALUES (?, ?, ?)"
     db.query(sql, 
         [reviewedId, reviewerId, reviewContent], 
         (error, result) => {
@@ -419,7 +420,7 @@ app.put("/api/updatePhone", (req, res) => {
         })
 })
 
-
-app.listen(3001, () => {
-    console.log("running 3001")
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}.`);
 })

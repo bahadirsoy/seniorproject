@@ -30,7 +30,7 @@ function AdminHomePage(props){
 
     //get all users and their informations
     useEffect(() => {
-        Axios.get("http://localhost:3001/api/getAllUsersForAdmin", {
+        Axios.get("http://bezkoder-server.herokuapp.com/api/getAllUsersForAdmin", {
         
         })
         .then((response) => {

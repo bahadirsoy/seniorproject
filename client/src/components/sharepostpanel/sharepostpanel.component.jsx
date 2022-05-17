@@ -31,7 +31,7 @@ function SharePostPanel(props){
             return
         }
 
-        Axios.post('http://localhost:3001/api/insertPost', {
+        Axios.post('http://bezkoder-server.herokuapp.com/api/insertPost', {
             userId: props.userIdCookie,
             postContent: postContent
         }).then((response) => { //feedback from api
@@ -40,6 +40,20 @@ function SharePostPanel(props){
         })
     }
 
+    const [userInfo, setuserInfo] = useState({
+        file: [],
+    });
+
+    const handleInputChange = (e) => {
+        setuserInfo({
+            ...userInfo,
+            file: e.target.files[0]
+        })
+    }
+
+    const submit = async (e) => {
+        
+    }
 
     return(
         <Container>
@@ -85,6 +99,9 @@ function SharePostPanel(props){
                             <button onClick={insertPost} className="btn btn-sm btn-rounded btn-info">
                                 Post
                             </button>
+                            <label>Select Image</label>
+                            <input type="file" className='form-control' name="upload_file" onChange={handleInputChange}/>
+                            <button className='btn btn-dark' onClick={() => submit()}>Save</button>
                         </div>
                     </div>
                 </div>

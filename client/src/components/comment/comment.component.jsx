@@ -26,7 +26,7 @@ function Comment(props){
     const [commentUsername, setCommentUsername] = useState('')
 
     const getCommentUsername = () => {
-        Axios("http://localhost:3001/api/getUsernameFromId", {
+        Axios("http://bezkoder-server.herokuapp.com/api/getUsernameFromId", {
             params: {
                 userId: props.commentUserId
             }

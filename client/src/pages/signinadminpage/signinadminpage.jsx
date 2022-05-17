@@ -42,7 +42,7 @@ function SignInAdminPage(props){
 
     //insert user api request
     const login = () => {
-        Axios.post('http://localhost:3001/api/loginAsAdmin', {
+        Axios.post('http://bezkoder-server.herokuapp.com/api/loginAsAdmin', {
             username: username, 
             password: password
         }).then((response) => { //feedback from api

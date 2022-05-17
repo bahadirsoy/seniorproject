@@ -34,7 +34,7 @@ function HomePage(props){
     //get all posts from db
     const getPosts = () => {
         if(!props.userIdCookie) return
-        Axios.get("http://localhost:3001/api/getPosts", {
+        Axios.get("https://bezkoder-server.herokuapp.com/api/getPosts", {
             
         })
         .then((response) => {

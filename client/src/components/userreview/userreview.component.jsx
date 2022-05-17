@@ -25,7 +25,7 @@ function UserReview(props){
 
     //specific user information using username which is link parameter
     useEffect(() => {
-        Axios.get("http://localhost:3001/api/getUsernameFromId", {
+        Axios.get("http://bezkoder-server.herokuapp.com/api/getUsernameFromId", {
             params: {
                 userId: props.reviewerId
             }
