@@ -10,10 +10,10 @@ const path = require("path")
 const passwordHash = require('password-hash');
 
 const db = mysql.createPool({
-    host: "us-cdbr-east-05.cleardb.net",
-    user: "b3e17cdd5aee61",
-    password: "24913314",
-    database: "heroku_d3e9c6ceba36c62"
+    host: "localhost",
+    user: "root",
+    password: "root",
+    database: "seniorprojectdbschema"
 })
 
 
@@ -31,7 +31,7 @@ app.get('/api/getId', (req, res) => {
     //username
     const username = req.query.username
 
-    sql = "SELECT userId FROM heroku_d3e9c6ceba36c62.user WHERE username = ?"
+    sql = "SELECT userId FROM seniorprojectdbschema.user WHERE username = ?"
     db.query(
         sql, 
         [username], 
@@ -54,7 +54,7 @@ app.get('/api/getUsernameFromId', (req, res) => {
     //username
     const userId = req.query.userId
     
-    sql = "SELECT username FROM heroku_d3e9c6ceba36c62.user WHERE userId = ?"
+    sql = "SELECT username FROM seniorprojectdbschema.user WHERE userId = ?"
     db.query(
         sql, 
         [userId], 
@@ -72,7 +72,7 @@ app.get('/api/getUsernameFromId', (req, res) => {
 //get all users for admin page
 app.get('/api/getAllUsersForAdmin', (req, res) => {
     
-    sql = "SELECT * FROM heroku_d3e9c6ceba36c62.user"
+    sql = "SELECT * FROM seniorprojectdbschema.user"
     db.query(
         sql, 
         (error, result) => {
@@ -89,7 +89,7 @@ app.get('/api/getAllUsersForAdmin', (req, res) => {
 app.get('/api/getPosts', (req, res) => {
 
 
-    sql = "SELECT * FROM heroku_d3e9c6ceba36c62.post"
+    sql = "SELECT * FROM seniorprojectdbschema.post"
     db.query(
         sql, 
         (error, result) => {
@@ -110,7 +110,7 @@ app.get('/api/getUserInformations', (req, res) => {
     //username
     const username = req.query.username
     
-    sql = "SELECT * FROM heroku_d3e9c6ceba36c62.user WHERE username = ?"
+    sql = "SELECT * FROM seniorprojectdbschema.user WHERE username = ?"
     db.query(
         sql, 
         [username], 
@@ -130,7 +130,7 @@ app.get('/api/getPostComments', (req, res) => {
     //get postId to get comment
     const postId = req.query.postId
 
-    sql = "SELECT * FROM heroku_d3e9c6ceba36c62.postcomment WHERE postId = ?"
+    sql = "SELECT * FROM seniorprojectdbschema.postcomment WHERE postId = ?"
     db.query(sql, 
         [postId], 
         (error, result) => {
@@ -150,7 +150,7 @@ app.get('/api/getUserReviews', (req, res) => {
     //reviewed user Id
     const reviewedId = req.query.reviewedId
     
-    sql = "SELECT * FROM heroku_d3e9c6ceba36c62.userreview WHERE reviewedId = ?"
+    sql = "SELECT * FROM seniorprojectdbschema.userreview WHERE reviewedId = ?"
     db.query(sql, [reviewedId], (error, result) => {
         if(error){
             console.log(error)
@@ -166,7 +166,7 @@ app.post('/api/insertPost', (req, res) => {
     const userId = req.body.userId
     const postContent = req.body.postContent
 
-    sql = "INSERT INTO heroku_d3e9c6ceba36c62.post (userId, postContent) VALUES (?, ?)"
+    sql = "INSERT INTO seniorprojectdbschema.post (userId, postContent) VALUES (?, ?)"
     db.query(sql, 
         [userId, postContent], 
         (error, result) => {
@@ -213,7 +213,7 @@ app.post('/api/login', (req,res) => {
     const username = req.body.username
     const password = req.body.password
 
-    const sql = "SELECT * FROM heroku_d3e9c6ceba36c62.user WHERE username = ?"
+    const sql = "SELECT * FROM seniorprojectdbschema.user WHERE username = ?"
     db.query(
         sql,
         [username],
@@ -223,7 +223,15 @@ app.post('/api/login', (req,res) => {
                 res.send({error: error})
             } else if(result.length > 0 && passwordHash.verify(password, result[0].password)){ //succesful login
                 res.send({
-                    result: result,
+                    result: {
+                        userId: result[0].userId,
+                        username: result[0].username,
+                        name: result[0].name,
+                        surname: result[0].surname,
+                        email: result[0].email,
+                        phone: result[0].phone,
+                        signupdate: result[0].signupdate,
+                    },
                     isLoginSuccessful: true
                 })
             } else{ //unsuccesful login
@@ -240,7 +248,7 @@ app.post('/api/loginAsAdmin', (req,res) => {
     const username = req.body.username
     const password = req.body.password
 
-    const sql = "SELECT * FROM heroku_d3e9c6ceba36c62.admin WHERE username = ?"
+    const sql = "SELECT * FROM seniorprojectdbschema.admin WHERE username = ?"
     db.query(
         sql,
         [username],
@@ -269,7 +277,7 @@ app.post('/api/insertPostcomment', (req, res) => {
     const userId = req.body.userId
     const newComment = req.body.newComment
     
-    sql = "INSERT INTO heroku_d3e9c6ceba36c62.postcomment (postId, userId, commentContent) VALUES (?, ?, ?)"
+    sql = "INSERT INTO seniorprojectdbschema.postcomment (postId, userId, commentContent) VALUES (?, ?, ?)"
     db.query(
         sql, 
         [postId, userId, newComment], 
@@ -291,7 +299,7 @@ app.post('/api/insertReview', (req, res) => {
     const reviewerId = req.body.reviewerId
     const reviewContent = req.body.reviewContent
 
-    sql = "INSERT INTO heroku_d3e9c6ceba36c62.userreview (reviewedId, reviewerId, reviewContent) VALUES (?, ?, ?)"
+    sql = "INSERT INTO seniorprojectdbschema.userreview (reviewedId, reviewerId, reviewContent) VALUES (?, ?, ?)"
     db.query(sql, 
         [reviewedId, reviewerId, reviewContent], 
         (error, result) => {

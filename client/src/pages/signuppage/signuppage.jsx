@@ -75,7 +75,7 @@ function SignUpPage(props){
         } else{
             
         }
-        Axios.post('http://bezkoder-server.herokuapp.com/api/insertUser', {
+        Axios.post('http://localhost:3001/api/insertUser', {
             username: trimmedUsername, 
             password: password,
             name: trimmedName,
@@ -89,7 +89,7 @@ function SignUpPage(props){
                 }
             } else{
                 //get id of user
-                Axios.get("http://bezkoder-server.herokuapp.com/api/getId", {
+                Axios.get("http://localhost:3001/api/getId", {
                     params: {
                         username: username
                     }

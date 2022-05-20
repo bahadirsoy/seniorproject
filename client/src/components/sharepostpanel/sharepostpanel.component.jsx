@@ -31,7 +31,7 @@ function SharePostPanel(props){
             return
         }
 
-        Axios.post('http://bezkoder-server.herokuapp.com/api/insertPost', {
+        Axios.post('http://localhost:3001/api/insertPost', {
             userId: props.userIdCookie,
             postContent: postContent
         }).then((response) => { //feedback from api

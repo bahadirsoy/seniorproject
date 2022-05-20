@@ -40,7 +40,7 @@ function ProfilePage(props){
 
     //update user function
     const updateUser = () => {
-        Axios.put("http://bezkoder-server.herokuapp.com/api/updateUser", {
+        Axios.put("http://localhost:3001/api/updateUser", {
             name: name,
             surname: surname,
             email: email,
@@ -67,7 +67,7 @@ function ProfilePage(props){
             setInputValidity("nameSuccess")
         }
         
-        Axios.put("http://bezkoder-server.herokuapp.com/api/updateName", {
+        Axios.put("http://localhost:3001/api/updateName", {
             name: trimmedName,
             username: userInformations.username
         }).then((response) => {
@@ -90,7 +90,7 @@ function ProfilePage(props){
             setInputValidity("surnameSuccess")
         }
 
-        Axios.put("http://bezkoder-server.herokuapp.com/api/updateSurname", {
+        Axios.put("http://localhost:3001/api/updateSurname", {
             surname: trimmedSurname,
             username: userInformations.username
         }).then((response) => {
@@ -124,7 +124,7 @@ function ProfilePage(props){
             setInputValidity("emailSuccess")
         }
 
-        Axios.put("http://bezkoder-server.herokuapp.com/api/updateEmail", {
+        Axios.put("http://localhost:3001/api/updateEmail", {
             email: email,
             username: userInformations.username
         }).then((response) => {
@@ -147,7 +147,7 @@ function ProfilePage(props){
             setInputValidity("phoneSuccess")
         }
 
-        Axios.put("http://bezkoder-server.herokuapp.com/api/updatePhone", {
+        Axios.put("http://localhost:3001/api/updatePhone", {
             phone: phone,
             username: userInformations.username
         }).then((response) => {
@@ -157,7 +157,7 @@ function ProfilePage(props){
 
     //get user informations
     useEffect(() => {
-        Axios.get("http://bezkoder-server.herokuapp.com/api/getUserInformations", {
+        Axios.get("http://localhost:3001/api/getUserInformations", {
             params: {
                 username: props.usernameCookie
             }

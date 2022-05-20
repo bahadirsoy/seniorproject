@@ -41,7 +41,7 @@ function Post(props){
 
     //get getUsernameFromId
     const getUsernameFromId = (() => {
-        Axios.get("http://bezkoder-server.herokuapp.com/api/getUsernameFromId", {
+        Axios.get("http://localhost:3001/api/getUsernameFromId", {
             params: {
                 userId: props.userId
             }
@@ -53,7 +53,7 @@ function Post(props){
 
     //fetch comments
     const fetchComments = () => {
-        Axios.get("http://bezkoder-server.herokuapp.com/api/getPostComments", {
+        Axios.get("http://localhost:3001/api/getPostComments", {
             params: {
                 postId: props.postId
             }
@@ -76,7 +76,7 @@ function Post(props){
             return
         }
 
-        Axios.post('http://bezkoder-server.herokuapp.com/api/insertPostComment', {
+        Axios.post('http://localhost:3001/api/insertPostComment', {
             newComment: newComment,
             postId: props.postId,
             userId: props.userIdCookie

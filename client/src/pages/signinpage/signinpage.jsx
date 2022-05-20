@@ -38,15 +38,16 @@ function SignInPage(props){
 
     //insert user api request
     const login = () => {
-        Axios.post('https://bezkoder-server.herokuapp.com/api/login', {
+        Axios.post('http://localhost:3001/api/login', {
             username: username, 
             password: password
         }).then((response) => { //feedback from api
             //if succesful login
             if(response.data.isLoginSuccessful){
                 //set cookies
-                props.setUsernameCookie("username", response.data.result[0].username)
-                props.setUsernameCookie("userId", response.data.result[0].userId)
+                //console.log(response.data.result.userId)
+                props.setUsernameCookie("username", response.data.result.username)
+                props.setUsernameCookie("userId", response.data.result.userId)
 
                 //navigate user
                 navigate("/")

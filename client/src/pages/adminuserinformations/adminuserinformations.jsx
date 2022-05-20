@@ -33,7 +33,7 @@ function AdminUserInformations(props){
     const [userInformations, setUserInformations] = useState()
 
     useEffect(() => {
-        Axios.get("http://bezkoder-server.herokuapp.com/api/getUserInformations", {
+        Axios.get("http://localhost:3001/api/getUserInformations", {
             params: {
                 username: username
             }

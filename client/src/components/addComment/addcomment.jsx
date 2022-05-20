@@ -26,7 +26,7 @@ function AddComment(props){
 
     //insert new comment
     const insertPostComment = () => {
-        Axios.post('http://bezkoder-server.herokuapp.com/api/insertPostComment', {
+        Axios.post('http://localhost:3001/api/insertPostComment', {
             newComment: newComment,
             postId: props.postId,
             userId: props.userIdCookie

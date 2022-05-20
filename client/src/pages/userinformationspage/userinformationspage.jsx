@@ -42,7 +42,7 @@ function UserInformations(props){
     //get all user profile informations and set state
     const getUserInformations = () => {
         if(userInformations) return
-        Axios.get("http://bezkoder-server.herokuapp.com/api/getUserInformations", {
+        Axios.get("http://localhost:3001/api/getUserInformations", {
             params: {
                 username: username
             }
@@ -63,7 +63,7 @@ function UserInformations(props){
     const getUserReviews = () => {
         if(!userInformations) return
 
-        Axios.get("http://bezkoder-server.herokuapp.com/api/getUserReviews", {
+        Axios.get("http://localhost:3001/api/getUserReviews", {
             params: {
                 reviewedId: userInformations.userId
             }
@@ -79,7 +79,7 @@ function UserInformations(props){
             return
         }
 
-        Axios.post('http://bezkoder-server.herokuapp.com/api/insertReview', {
+        Axios.post('http://localhost:3001/api/insertReview', {
             reviewedId: userInformations.userId,
             reviewerId: props.userIdCookie,
             reviewContent: newReview
