@@ -31,28 +31,27 @@ function SharePostPanel(props){
             return
         }
 
-        Axios.post('http://localhost:3001/api/insertPost', {
-            userId: props.userIdCookie,
-            postContent: postContent
+        const formData = new FormData();
+        formData.append('userId', props.userIdCookie)
+        formData.append('postContent', postContent)
+        Object.values(images).forEach(file => {
+            formData.append("images", file);
+        })
+
+        Axios.post('http://localhost:3001/api/insertPost', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
         }).then((response) => { //feedback from api
             console.log(response)
             window.location.reload()
         })
     }
 
-    const [userInfo, setuserInfo] = useState({
-        file: [],
-    });
+    const [images, setImages] = useState([])
 
     const handleInputChange = (e) => {
-        setuserInfo({
-            ...userInfo,
-            file: e.target.files[0]
-        })
-    }
-
-    const submit = async (e) => {
-        
+        setImages(e.target.files)
     }
 
     return(
@@ -85,23 +84,10 @@ function SharePostPanel(props){
                             onChange = {(e) => {setPostContent(e.target.value)}}>
                         </textarea>
                         <div className="actions">
-                            <div className="btn-group">
-                                <a type="button" className="btn-link" title="" data-toggle="tooltip" data-original-title="Post an Video">
-                                    <FontAwesomeIcon color='white' size="lg" icon={faImage} />
-                                </a>
-                                <a type="button" className="btn-link" title="" data-toggle="tooltip" data-original-title="Post an Idea">
-                                    <FontAwesomeIcon color='white' size="lg" icon={faImage} />
-                                </a>
-                                <a type="button" className="btn-link" title="" data-toggle="tooltip" data-original-title="Post an Question">
-                                    <FontAwesomeIcon color='white' size="lg" icon={faImage} />
-                                </a>
-                            </div>
+                            <input type="file" multiple className='form-control' name="images" onChange={handleInputChange}/>
                             <button onClick={insertPost} className="btn btn-sm btn-rounded btn-info">
                                 Post
                             </button>
-                            <label>Select Image</label>
-                            <input type="file" className='form-control' name="upload_file" onChange={handleInputChange}/>
-                            <button className='btn btn-dark' onClick={() => submit()}>Save</button>
                         </div>
                     </div>
                 </div>

@@ -5,6 +5,7 @@ const cors = require('cors')
 const app = express()
 const mysql = require('mysql')
 const path = require("path")
+const multer = require('multer')
 
 //import password hash
 const passwordHash = require('password-hash');
@@ -22,7 +23,39 @@ app.use(cors())
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
+const fileStorageEngine = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, '../client/src/uploaded_images')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "-" +file.originalname)
+    }
+})
+const upload = multer({storage: fileStorageEngine})
 
+app.post('/uploadimage', upload.array('images', 3) ,(req, res) => {
+    const postId = req.body.postId
+    
+    let filenames = ""
+    req.files.map(file => {
+        filenames += (file.filename + " ")
+    })
+
+    sql = "INSERT INTO seniorprojectdbschema.images (postId ,images) VALUES (?, ?)"
+    res.send(postId)
+    /*db.query(
+        sql, 
+        [postId, filenames],
+        (error, result) => {
+            if(error){
+                console.log(error)
+                res.send(result)
+            } else{
+                res.send(result)
+            }
+        }
+    )*/
+})
 
 
 //get id of user when he signed up
@@ -72,7 +105,7 @@ app.get('/api/getUsernameFromId', (req, res) => {
 //get all users for admin page
 app.get('/api/getAllUsersForAdmin', (req, res) => {
     
-    sql = "SELECT * FROM seniorprojectdbschema.user"
+    sql = "SELECT * FROM seniorprojectdbschema.user;"
     db.query(
         sql, 
         (error, result) => {
@@ -162,13 +195,19 @@ app.get('/api/getUserReviews', (req, res) => {
 })
 
 //insert new post
-app.post('/api/insertPost', (req, res) => {
+app.post('/api/insertPost', upload.array('images', 3) ,(req, res) => {
     const userId = req.body.userId
     const postContent = req.body.postContent
 
-    sql = "INSERT INTO seniorprojectdbschema.post (userId, postContent) VALUES (?, ?)"
+    let filenames = ""
+    req.files.map(file => {
+        filenames += (file.filename + " ")
+    })
+    filenames = filenames.trim()
+
+    sql = "INSERT INTO seniorprojectdbschema.post (userId, postContent, images) VALUES (?, ?, ?)"
     db.query(sql, 
-        [userId, postContent], 
+        [userId, postContent, filenames], 
         (error, result) => {
             if(error){
                 console.log(error)
@@ -179,7 +218,6 @@ app.post('/api/insertPost', (req, res) => {
         }
     )
 })
-
 
 //SIGN UP REQUEST
 app.post('/api/insertUser', (req, res) => {

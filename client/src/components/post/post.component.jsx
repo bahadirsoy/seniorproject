@@ -18,9 +18,12 @@ import { Link } from 'react-router-dom';
 import Comment from '../comment/comment.component';
 import AddComment from '../addComment/addcomment';
 
+//import random id generator
+import uuid from 'react-uuid'
 
 
 function Post(props){
+
 
     //username is fetched with useeffect using userId
     const [username, setUsername] = useState('')
@@ -95,16 +98,23 @@ function Post(props){
                         <Card.Body>
                             
                             <Card.Title>
-                                {username} 
+                                {username}
                             </Card.Title>
 
                             <Card.Text className='mt-4'>
                                 {props.postContent}
                             </Card.Text>
                             
-                            <Card.Img 
-                                
-                            />
+                            {
+                                props.postImages ?
+                                props.postImages.split(" ").map((image) => {
+                                    const path = require(`../../uploaded_images/${image}`)
+                                    return(
+                                        <Card.Img key={uuid()} src={path} alt="Girl in a jacket" />
+                                    )
+                                }) :
+                                null
+                            }
 
                             <div className='mt-4'>
                             <Link to={`/userInformations/${username}`}>

@@ -53,7 +53,7 @@ function HomePage(props){
             <SharePostPanel
                 userIdCookie = {props.userIdCookie}
             />
-            
+           
             {
                 isLoading ?
                 posts.map((info) => {
@@ -62,6 +62,7 @@ function HomePage(props){
                             key = {info.postId}
                             postId = {info.postId}
                             postContent = {info.postContent}
+                            postImages = {info.images}
                             postTime = {info.postTime}
                             
                             userId = {info.userId}
@@ -70,7 +71,6 @@ function HomePage(props){
                 }) :
                 "Loading..."
             }
-
         </> :
 
         <Container>
