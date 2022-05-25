@@ -60,6 +60,7 @@ function ChatPage(props){
     }
 
     return(
+        props.userIdCookie !== userId ?
         <Container fluid className='mt-5'>
             <h1 className='mx-5'>Chat with Soyisi1</h1>
             
@@ -96,6 +97,7 @@ function ChatPage(props){
                 }
             </Row>
         </Container>
+        : "You cannot chat with your self"
     )
 }
 

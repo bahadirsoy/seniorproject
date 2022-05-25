@@ -133,7 +133,7 @@ function UserInformations(props){
                         />
                         
                         {
-                            userInformations ?
+                            userInformations && props.usernameCookie !== username ?
                             <Link to={`/chat/${userInformations.userId}`}>
                                 <Button>
                                     Send Message
