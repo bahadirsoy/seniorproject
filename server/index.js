@@ -212,7 +212,7 @@ app.get('/api/getUserReviews', (req, res) => {
 app.post('/api/insertPost' ,(req, res) => {
     var fileNames = ""
 
-    const singleUpload = upload.array('images', 3)
+    const singleUpload = upload.array('images', 10)
     singleUpload(req, res, function(err, some) {
         if (err) {
             return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
@@ -369,6 +369,26 @@ app.post('/api/insertReview', (req, res) => {
                 res.send(error)
             } else{
                 console.log(result)
+                res.send(result)
+            }
+        }
+    )
+})
+
+//send message
+app.post('/api/sendMessage', (req, res) => {
+    const senderId = req.body.senderId
+    const receiverId = req.body.receiverId
+    const message = req.body.message
+
+    sql = "INSERT INTO seniorprojectdbschema.chat (senderId, receiverId, message) VALUES (?, ?, ?)"
+    db.query(
+        sql,
+        [senderId, receiverId, message], 
+        (error, result) => {
+            if(error){
+                res.send(error)
+            } else{
                 res.send(result)
             }
         }
