@@ -16,7 +16,7 @@ import { Container, Row, Col, Button, InputGroup, FormControl } from 'react-boot
 import Axios from 'axios'
 
 //import react router
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 
 function UserInformations(props){
@@ -131,6 +131,17 @@ function UserInformations(props){
                             placeholder = {userInformations ? userInformations.phone : null}
                             readonly = {1}
                         />
+                        
+                        {
+                            userInformations ?
+                            <Link to={`/chat/${userInformations.userId}`}>
+                                <Button>
+                                    Send Message
+                                </Button>
+                            </Link>
+                            : null
+                        }
+
                     </Col>
 
                     <Col>
