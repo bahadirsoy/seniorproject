@@ -5,10 +5,14 @@ import './chatpage.styles.css'
 import { useParams } from 'react-router-dom';
 
 //import react bootsrap components
-import { Container, Row, Col, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Alert, InputGroup, FormControl, Button } from 'react-bootstrap';
 
 //import useEffect
 import { Fragment, useEffect, useState } from 'react';
+
+//import fontawesome icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMessage } from '@fortawesome/free-solid-svg-icons'
 
 //import Axios
 import Axios from 'axios';
@@ -23,6 +27,9 @@ function ChatPage(props){
 
     //isloading
     const [isLoading, setIsLoading] = useState(0)
+
+    //new message
+    const [newMessage, setNewMessage] = useState('')
 
     useEffect(() =>{
         //get received messages
@@ -55,6 +62,25 @@ function ChatPage(props){
         
     }, [])
 
+    //send a message
+    const sendMessage = () => {
+        if(newMessage.trim() == "" || !newMessage){
+            return
+        }
+
+        Axios.post('http://localhost:3001/api/sendMessage', {
+            senderId: props.userIdCookie,
+            receiverId: userId,
+            message: newMessage
+        }).then((response) => { //feedback from api
+            messages.push({
+                chatId: 50,
+                message: newMessage
+            })
+            setNewMessage("")
+        })
+    }
+
     function custom_sort(a, b) {
         return new Date(a.messageTime).getTime() - new Date(b.messageTime).getTime();
     }
@@ -68,7 +94,6 @@ function ChatPage(props){
                 {
                     messages ?
                     messages.map(infos => {
-                        console.log(infos)
                         if(infos.receiverId == props.userIdCookie){
                             return(
                                 <Fragment key={infos.chatId}>
@@ -96,6 +121,20 @@ function ChatPage(props){
                     }) : null
                 }
             </Row>
+            <InputGroup className="my-5">
+                <InputGroup.Text id="basic-addon1">
+                    <FontAwesomeIcon className='mx-4' icon={faMessage} />
+                </InputGroup.Text>
+                <FormControl
+                    placeholder="Send a message"
+                    aria-describedby="basic-addon1"
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    value={newMessage}
+                />
+                <Button onClick={sendMessage} variant="outline-secondary" id="basic-addon1">
+                    Add
+                </Button>
+            </InputGroup>
         </Container>
         : "You cannot chat with your self"
     )
