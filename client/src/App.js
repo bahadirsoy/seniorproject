@@ -12,6 +12,7 @@ import UserInformations from './pages/userinformationspage/userinformationspage'
 import SignInAdminPage from './pages/signinadminpage/signinadminpage';
 import AdminHomePage from './pages/adminhomepage/adminhomepage';
 import AdminUserInformations from './pages/adminuserinformations/adminuserinformations';
+import ChatPage from './pages/chatpage/chatpage';
 
 //import react router components
 import {
@@ -91,6 +92,13 @@ function App() {
         <Route path='/adminUserInformations/:username' element={
           <AdminUserInformations 
             
+          />
+        }
+        />
+        <Route path='/chat/:userId' element={
+          <ChatPage 
+            usernameCookie = {usernameCookie.username}
+            userIdCookie = {userIdCookie.userId}
           />
         }
         />
