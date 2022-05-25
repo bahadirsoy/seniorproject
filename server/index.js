@@ -75,6 +75,26 @@ app.get('/api/getId', (req, res) => {
 })
 
 
+//get chat messages
+app.get('/api/getChatMessages', (req, res) => {
+    const senderId = req.query.senderId
+    const receiverId = req.query.receiverId
+
+    sql = "SELECT * FROM seniorprojectdbschema.chat WHERE senderId = ? AND receiverId = ?"
+    db.query(
+        sql, 
+        [senderId,receiverId], 
+        (error, result) => {
+            if(error){
+                console.log(error)
+            } else{
+                res.send(result)
+            }
+        }
+    )
+})
+
+
 //get username from id of the user
 app.get('/api/getUsernameFromId', (req, res) => {
 
