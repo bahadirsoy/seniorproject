@@ -108,9 +108,9 @@ function Post(props){
                             {
                                 props.postImages ?
                                 props.postImages.split(" ").map((image) => {
-                                    const path = require(`../../uploaded_images/${image}`)
+                                    //const path = require(`../../uploaded_images/${image}`)
                                     return(
-                                        <Card.Img key={uuid()} src={path} alt="Girl in a jacket" />
+                                        <Card.Img key={uuid()} src={`https://soyisibucket.s3.eu-central-1.amazonaws.com/images/${image}`} alt="Girl in a jacket" />
                                     )
                                 }) :
                                 null

@@ -6,6 +6,22 @@ const app = express()
 const mysql = require('mysql')
 const path = require("path")
 const multer = require('multer')
+const multerS3 = require('multer-s3');
+const aws = require('aws-sdk');
+
+aws.config.update({
+    // Your SECRET ACCESS KEY from AWS should go here,
+    // Never share it!
+    // Setup Env Variable, e.g: process.env.SECRET_ACCESS_KEY
+    secretAccessKey: "kYO6RrRP0+3Kk/a9+NaJmSmbTNiRVAQrkSKyQd5J",
+    // Not working key, Your ACCESS KEY ID from AWS should go here,
+    // Never share it!
+    // Setup Env Variable, e.g: process.env.ACCESS_KEY_ID
+    accessKeyId: "AKIAWCRSVGHSZTME4DWP",
+    region: 'eu-central-1' // region of your bucket
+});
+
+const s3 = new aws.S3();
 
 //import password hash
 const passwordHash = require('password-hash');
@@ -17,45 +33,23 @@ const db = mysql.createPool({
     database: "seniorprojectdbschema"
 })
 
-
-
 app.use(cors())
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
-const fileStorageEngine = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, '../client/src/uploaded_images')
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + "-" +file.originalname)
-    }
-})
-const upload = multer({storage: fileStorageEngine})
-
-app.post('/uploadimage', upload.array('images', 3) ,(req, res) => {
-    const postId = req.body.postId
-    
-    let filenames = ""
-    req.files.map(file => {
-        filenames += (file.filename + " ")
+const upload = multer({
+    storage: multerS3({
+      s3: s3,
+      bucket: 'soyisibucket/images',
+      acl: 'public-read',
+      metadata: function (req, file, cb) {
+        cb(null, {fieldName: file.fieldname});
+      },
+      key: function (req, file, cb) {
+        cb(null, Date.now().toString() + file.originalname)
+      }
     })
-
-    sql = "INSERT INTO seniorprojectdbschema.images (postId ,images) VALUES (?, ?)"
-    res.send(postId)
-    /*db.query(
-        sql, 
-        [postId, filenames],
-        (error, result) => {
-            if(error){
-                console.log(error)
-                res.send(result)
-            } else{
-                res.send(result)
-            }
-        }
-    )*/
-})
+  })
 
 
 //get id of user when he signed up
@@ -195,28 +189,37 @@ app.get('/api/getUserReviews', (req, res) => {
 })
 
 //insert new post
-app.post('/api/insertPost', upload.array('images', 3) ,(req, res) => {
-    const userId = req.body.userId
-    const postContent = req.body.postContent
+app.post('/api/insertPost' ,(req, res) => {
+    var fileNames = ""
 
-    let filenames = ""
-    req.files.map(file => {
-        filenames += (file.filename + " ")
-    })
-    filenames = filenames.trim()
-
-    sql = "INSERT INTO seniorprojectdbschema.post (userId, postContent, images) VALUES (?, ?, ?)"
-    db.query(sql, 
-        [userId, postContent, filenames], 
-        (error, result) => {
-            if(error){
-                console.log(error)
-                res.send(result)
-            } else{
-                res.send(result)
-            }
+    const singleUpload = upload.array('images', 3)
+    singleUpload(req, res, function(err, some) {
+        if (err) {
+            return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
         }
-    )
+
+        req.files.map(file => {
+            fileNames += file.key + " "
+        })
+        fileNames = fileNames.trim()
+
+        const userId = req.body.userId
+        const postContent = req.body.postContent
+
+        sql = "INSERT INTO seniorprojectdbschema.post (userId, postContent, images) VALUES (?, ?, ?)"
+        db.query(sql, 
+            [userId, postContent, fileNames],
+            (error, result) => {
+                if(error){
+                    console.log(error)
+                    res.send(result)
+                } else{
+                    res.send(result)
+                }
+            }
+        )
+    });
+    
 })
 
 //SIGN UP REQUEST
