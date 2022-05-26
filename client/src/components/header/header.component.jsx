@@ -34,6 +34,7 @@ function Header(props){
     return(
         <div>
             {
+                //if it is admin page
                 location.pathname.includes("admin") ? 
 
                 <div className="header">
@@ -80,6 +81,7 @@ function Header(props){
                 
                 :
 
+                //if it is user page
                 <div className="header">
                 <a className="logo">CompanyLogo</a>
                 {
@@ -90,7 +92,7 @@ function Header(props){
                 
                 <div className="header-right">
 
-                    <Link to='/' className="active">
+                    <Link to='/'>
                         Home
                     </Link>
                     
@@ -102,11 +104,11 @@ function Header(props){
                                 Profile
                             </Link>
 
-                            <Link to="/activities">
-                                Activities
+                            <Link to="/searchUser">
+                                Search User
                             </Link>
 
-                            <a onClick={logout}>
+                            <a onClick={logout} className="pointer">
                                 Log out
                             </a>
                         </span> :

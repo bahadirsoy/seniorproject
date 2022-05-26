@@ -45,3 +45,7 @@
       float: none;
     }
   }
+
+.pointer{
+  cursor: pointer
+}

@@ -13,6 +13,7 @@ import SignInAdminPage from './pages/signinadminpage/signinadminpage';
 import AdminHomePage from './pages/adminhomepage/adminhomepage';
 import AdminUserInformations from './pages/adminuserinformations/adminuserinformations';
 import ChatPage from './pages/chatpage/chatpage';
+import SearchUser from './pages/searchuserpage/searchuser';
 
 //import react router components
 import {
@@ -97,6 +98,13 @@ function App() {
         />
         <Route path='/chat/:userId' element={
           <ChatPage 
+            usernameCookie = {usernameCookie.username}
+            userIdCookie = {userIdCookie.userId}
+          />
+        }
+        />
+        <Route path='/searchUser' element={
+          <SearchUser 
             usernameCookie = {usernameCookie.username}
             userIdCookie = {userIdCookie.userId}
           />
