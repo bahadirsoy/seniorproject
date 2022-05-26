@@ -151,8 +151,7 @@ app.get('/api/getAllUsers', (req, res) => {
 //get all posts from db and send it to homepage
 app.get('/api/getPosts', (req, res) => {
 
-
-    sql = "SELECT * FROM seniorprojectdbschema.post"
+    sql = "SELECT postId, userId, postContent, images, DATE_FORMAT(postTime, '%d-%m-%Y') as postTime FROM seniorprojectdbschema.post"
     db.query(
         sql, 
         (error, result) => {
