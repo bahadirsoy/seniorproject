@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import './post.styles.css'
 
 //import reactstrap components
-import { Container, Row, Col, Card, Button, InputGroup, FormControl } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, InputGroup, FormControl, Accordion } from 'react-bootstrap';
 
 //import axios for api request
 import Axios from 'axios'
@@ -143,22 +143,27 @@ function Post(props){
                         </Button>
                     </InputGroup>
                         
+                    <Accordion>
+                        <Accordion.Item eventKey="0">
+                            <Accordion.Header>See comments</Accordion.Header>
+                            <Accordion.Body>
+                                {
+                                    isLoaded ? comments.map(comment => {
+                                        return(
+                                            <div key={comment.postcommentId}>
+                                                <Comment
+                                                    commentUserId={comment.userId} 
+                                                    commentContent={comment.commentContent}
+                                                    commentTime={comment.commentTime}
+                                                />
+                                            </div>
+                                        )
+                                    }) : "Loading..."
 
-                        {
-                            isLoaded ? comments.map(comment => {
-                                return(
-                                    <div key={comment.postcommentId}>
-                                        <Comment
-                                            commentUserId={comment.userId} 
-                                            commentContent={comment.commentContent}
-                                            commentTime={comment.commentTime}
-                                        />
-                                        
-                                    </div>
-                                )
-                            }) : "Loading..."
-
-                        }
+                                }
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    </Accordion>
                         
                 </Col>
             </Row>
