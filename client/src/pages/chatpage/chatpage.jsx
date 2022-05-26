@@ -31,6 +31,9 @@ function ChatPage(props){
     //new message
     const [newMessage, setNewMessage] = useState('')
 
+    //which user we are chatting with
+    const [username, setUsername] = useState('')
+
     useEffect(() =>{
         //get received messages
         Axios.get("http://localhost:3001/api/getChatMessages", {
@@ -59,6 +62,14 @@ function ChatPage(props){
             })
         })
 
+        Axios.get("http://localhost:3001/api/getUsernameFromId", {
+                params: {
+                    userId: userId
+                }
+            })
+            .then((response) => {
+                setUsername(response.data[0].username)
+            })
         
     }, [])
 
@@ -88,7 +99,7 @@ function ChatPage(props){
     return(
         props.userIdCookie !== userId ?
         <Container fluid className='mt-5'>
-            <h1 className='mx-5'>Chat with Soyisi1</h1>
+            <h1 className='mx-5'>Chat with {username}</h1>
             
             <Row className='mt-5 chat-box'>
                 {
