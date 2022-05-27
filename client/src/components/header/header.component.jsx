@@ -60,9 +60,9 @@ function Header(props){
                                     Activity
                                 </Link>
 
-                                <a onClick={logout}>
+                                <Link to="/" onClick={logout}>
                                     Log out
-                                </a>
+                                </Link>
                             </span> :
 
                             <span>

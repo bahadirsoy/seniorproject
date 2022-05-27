@@ -14,6 +14,9 @@ import { Fragment, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMessage } from '@fortawesome/free-solid-svg-icons'
 
+//import random id generator
+import uuid from 'react-uuid'
+
 //import Axios
 import Axios from 'axios';
 
@@ -85,7 +88,7 @@ function ChatPage(props){
             message: newMessage
         }).then((response) => { //feedback from api
             messages.push({
-                chatId: 50,
+                chatId: uuid(),
                 message: newMessage
             })
             setNewMessage("")

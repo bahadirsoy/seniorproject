@@ -89,7 +89,15 @@ function Post(props){
             userId: props.userIdCookie
         }).then((response) => { //feedback from api
             console.log(response)
-            window.location.reload()
+            console.log(comments)
+            comments.push({
+                postcommentId: response.data.insertId,
+                postId: props.postId,
+                userId: props.userIdCookie,
+                commentContent: newComment,
+                commentTime: "Just Now"
+            })
+            setNewComment("")
         })
     }
 
