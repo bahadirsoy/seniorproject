@@ -192,7 +192,7 @@ app.get('/api/getPostComments', (req, res) => {
     //get postId to get comment
     const postId = req.query.postId
 
-    sql = "SELECT * FROM seniorprojectdbschema.postcomment WHERE postId = ?"
+    sql = "SELECT postcommentId, postId, userId, commentContent, DATE_FORMAT(commentTime, '%d-%m-%Y') as commentTime FROM seniorprojectdbschema.postcomment WHERE postId = ?"
     db.query(sql, 
         [postId], 
         (error, result) => {

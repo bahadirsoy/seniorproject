@@ -21,6 +21,10 @@ import AddComment from '../addComment/addcomment';
 //import random id generator
 import uuid from 'react-uuid'
 
+//import fontawesome icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faComments } from '@fortawesome/free-solid-svg-icons'
+
 
 function Post(props){
 
@@ -188,7 +192,9 @@ function Post(props){
 
 
                     <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+                        <InputGroup.Text id="basic-addon1">
+                            <FontAwesomeIcon className='mx-4' icon={faComments} />
+                        </InputGroup.Text>
                         <FormControl
                             placeholder="Add new comment..."
                             aria-describedby="basic-addon1"

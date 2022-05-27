@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import './sharepostpanel.styles.css'
 
 //import reactstrap component
-import { Container, Row, Alert } from 'react-bootstrap';
+import { Container, Row, Alert, Button } from 'react-bootstrap';
 
 //import fontawesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -79,14 +79,17 @@ function SharePostPanel(props){
                     <div className="panel-activity__status">
                         <textarea 
                             name="user_activity" 
-                            placeholder="Share what you've been up to..."
+                            placeholder="Type your message here..."
                             className="form-control"
                             onChange = {(e) => {setPostContent(e.target.value)}}>
                         </textarea>
                         <div className="actions">
-                            <input type="file" multiple className='form-control' name="images" onChange={handleInputChange}/>
-                            <button onClick={insertPost} className="btn btn-sm btn-rounded btn-info">
-                                Post
+                            <label htmlFor="filePicker" className='btn btn-warning'>
+                                Add images to your post
+                            </label>
+                            <input type="file" multiple className='form-control' name="images" onChange={handleInputChange} id="filePicker" style={{visibility:"hidden"}}/>
+                            <button onClick={insertPost} className="btn btn-rounded btn-info">
+                                Send Post
                             </button>
                         </div>
                     </div>

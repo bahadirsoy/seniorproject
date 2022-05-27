@@ -35,6 +35,55 @@ function Comment(props){
         })
     }
 
+    //convert timestamp to understandable date format
+    const convertTime = (date) => {
+        const splittedDate = date.split("-")
+        let dateString = "" + splittedDate[0] + " of "
+        
+        switch(splittedDate[1]){
+            case "01":
+                dateString += "January"
+                break;
+            case "02":
+                dateString += "February"
+                break;
+            case "03":
+                dateString += "March"
+                break;
+            case "04":
+                dateString += "April"
+                break;
+            case "05":
+                dateString += "May"
+                break;
+            case "06":
+                dateString += "June"
+                break;
+            case "07":
+                dateString += "July"
+                break;
+            case "08":
+                dateString += "August"
+                break;
+            case "09":
+                dateString += "September"
+                break;
+            case "10":
+                dateString += "October"
+                break;
+            case "11":
+                dateString += "November"
+                break;
+            case "12":
+                dateString += "December"
+                break;
+            default:
+                break;
+
+        }
+        return dateString
+    }
+
     return(
         <Card className="mt-2 ml-5">
             <Card.Title className='mt-1'>
@@ -46,7 +95,7 @@ function Comment(props){
             </Card.Text>
 
             <Card.Footer className="text-muted">
-                {props.commentTime}
+                {convertTime(props.commentTime)}
             </Card.Footer>
         </Card>
     )
