@@ -20,6 +20,10 @@ import uuid from 'react-uuid'
 //import Axios
 import Axios from 'axios';
 
+//import socket io
+import { io } from 'socket.io-client'
+const socket = io.connect("http://localhost:3002")
+
 
 function ChatPage(props){
 
@@ -30,7 +34,7 @@ function ChatPage(props){
     const [messages, setMessages] = useState([])
 
     //isloading
-    const [isLoading, setIsLoading] = useState(0)
+    const [isLoading, setIsLoading] = useState("")
 
     //new message
     const [newMessage, setNewMessage] = useState('')
@@ -38,8 +42,21 @@ function ChatPage(props){
     //which user we are chatting with
     const [username, setUsername] = useState('')
     
+    //socket.io room value
+    let room = [userId, props.userIdCookie].sort().toString();
+
 
     useEffect(() =>{
+        socket.on("receive_message", (data) => {
+            messages.push({
+                chatId: uuid(),
+                message: data,
+                receiverId: props.userIdCookie
+            })
+            setIsLoading(uuid())
+        })
+        socket.emit("join_room", room)
+
         //get received messages
         Axios.get("http://localhost:3001/api/getChatMessages", {
             params: {
@@ -83,6 +100,11 @@ function ChatPage(props){
         if(newMessage.trim() == "" || !newMessage){
             return
         }
+
+        socket.emit("send_message", {
+            message: newMessage,
+            room: room
+        })
 
         Axios.post('http://localhost:3001/api/sendMessage', {
             senderId: props.userIdCookie,

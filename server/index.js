@@ -4,7 +4,6 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const app = express()
 const mysql = require('mysql')
-const path = require("path")
 const multer = require('multer')
 const multerS3 = require('multer-s3');
 const aws = require('aws-sdk');
@@ -37,6 +36,36 @@ const db = mysql.createPool({
 app.use(cors())
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}))
+
+
+
+const http = require('http')
+const {Server} = require("socket.io")
+const server = http .createServer(app)
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"],
+    },
+})
+
+io.on("connection", (socket) => {
+    socket.on("join_room", (data) => {
+        console.log("someone joined " + data)
+        socket.join(data)
+    })
+
+    socket.on("send_message", (data) => {
+        socket.to(data.room).emit("receive_message", data.message)
+    })
+})
+
+server.listen(3002, () => {
+    console.log("socketio server is running")
+})
+
+
+
 
 
 
