@@ -9,6 +9,7 @@ const multer = require('multer')
 const multerS3 = require('multer-s3');
 const aws = require('aws-sdk');
 
+
 aws.config.update({
     // Your SECRET ACCESS KEY from AWS should go here,
     // Never share it!
@@ -36,6 +37,8 @@ const db = mysql.createPool({
 app.use(cors())
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}))
+
+
 
 const upload = multer({
     storage: multerS3({
@@ -254,7 +257,39 @@ app.post('/api/insertPost' ,(req, res) => {
             }
         )
     });
-    
+})
+
+//insert new post for furkan
+app.post('/api/insertPostForFurkan' ,(req, res) => {
+    var fileNames = ""
+
+    const singleUpload = upload.array('images', 10)
+    singleUpload(req, res, function(err, some) {
+        if (err) {
+            return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
+        }
+
+        req.files.map(file => {
+            fileNames += file.key + " "
+        })
+        fileNames = fileNames.trim()
+
+        const userId = parseInt(req.body.userId)
+        const postContent = req.body.postContent
+
+        sql = "INSERT INTO seniorprojectdbschema.post (userId, postContent, images) VALUES (?, ?, ?)"
+        db.query(sql, 
+            [userId, postContent, fileNames],
+            (error, result) => {
+                if(error){
+                    console.log(error)
+                    res.send(result)
+                } else{
+                    res.send(result)
+                }
+            }
+        )
+    });
 })
 
 //SIGN UP REQUEST
@@ -404,7 +439,9 @@ app.post('/api/sendMessage', (req, res) => {
             if(error){
                 res.send(error)
             } else{
-                res.send(result)
+                res.send({
+                    message: message
+                })
             }
         }
     )

@@ -88,8 +88,6 @@ function Post(props){
             postId: props.postId,
             userId: props.userIdCookie
         }).then((response) => { //feedback from api
-            console.log(response)
-            console.log(comments)
             comments.push({
                 postcommentId: response.data.insertId,
                 postId: props.postId,

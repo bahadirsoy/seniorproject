@@ -20,6 +20,7 @@ import uuid from 'react-uuid'
 //import Axios
 import Axios from 'axios';
 
+
 function ChatPage(props){
 
     //userId parameter to find out which user is chatting current user with
@@ -36,6 +37,7 @@ function ChatPage(props){
 
     //which user we are chatting with
     const [username, setUsername] = useState('')
+    
 
     useEffect(() =>{
         //get received messages
